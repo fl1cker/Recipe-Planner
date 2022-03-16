@@ -4,6 +4,14 @@
   position: relative;
 }
 
+.card-wrapper.selected .card-front {
+  transform: rotateY(180deg);
+}
+
+.card-wrapper.selected .card-back {
+  transform: rotateY(0deg);
+}
+
 .card-front,
 .card-back {
   border: 8px solid transparent;
@@ -40,14 +48,16 @@
   border-radius: 5px 5px 2px 2px;
   backface-visibility: hidden;
   transform: rotate3d(0, 1, 0, 180deg);
+  transform-style: preserve-3d;
 }
 
-.card-wrapper.selected .card-front {
-  transform: rotateY(180deg);
-}
-
-.card-wrapper.selected .card-back {
-  transform: rotateY(0deg);
+.figure {
+  box-sizing: border-box;
+  margin: 7px 0 0 0;
+  width: 90%;
+  height: 45%;
+  justify-content: center;
+  align-self: center;
 }
 
 .food-image {
@@ -58,15 +68,6 @@
   border-image: radial-gradient(circle, grey 30%, white 50%, grey 80%) 30;
   -webkit-clip-path: ellipse(72% 67% at 50% 50%);
   clip-path: ellipse(72% 67% at 50% 50%);
-}
-
-.figure {
-  box-sizing: border-box;
-  margin: 7px 0 0 0;
-  width: 90%;
-  height: 45%;
-  justify-content: center;
-  align-self: center;
 }
 
 figcaption {
@@ -93,17 +94,6 @@ figcaption {
   position: relative;
 }
 
-.title::before,
-.title::after {
-  position: absolute;
-  top: 0;
-  content: '\2668';
-  color: orangered;
-  width: 15px;
-  height: 15px;
-  text-shadow: yellow 1px 1px;
-}
-
 .title::before {
   left: -20px;
 }
@@ -125,6 +115,8 @@ figcaption {
 .rating > i {
   display: block;
   font-size: 3rem;
+  color: grey;
+  text-shadow: 0 0 3px grey;
 }
 
 .details {
@@ -151,4 +143,9 @@ figcaption {
 
 .time-description {
   text-decoration: underline;
+}
+
+.rating > i.selected-star {
+  color: gold;
+  text-shadow: 0 0 3px gold;
 }

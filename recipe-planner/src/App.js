@@ -8,17 +8,17 @@ const cardData = {
   imageSource: 'pizza.jpg',
   prepTime: '15',
   completionTime: '60',
-  rating: 5,
+  rating: 3,
   ingredients: [
     {
-      name: 'Fucks',
-      amount: 0,
-      unit: 'To Give',
+      name: 'Vegetable Oil',
+      amount: 4,
+      unit: 'fl oz',
     },
     {
-      name: 'Time',
-      amount: 0,
-      unit: 'To Put Up With Your Shit',
+      name: 'Cookie Dough',
+      amount: 2,
+      unit: 'oz',
     },
   ],
 };
@@ -27,11 +27,11 @@ function App() {
   return (
     <div className="app">
       <div className="cards">
-        {daysOfTheWeek.slice(0, 5).map((day, index) => {
+        {daysOfTheWeek.slice(0, 5).map((day) => {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
-              <Card {...cardData} key={index} />
+              <Card {...cardData} />
             </div>
           );
         })}

@@ -1,4 +1,7 @@
 import './Card.css';
+import IngredientList from './IngredientList';
+
+const maxRating = 5;
 
 function Card({
   title,
@@ -35,35 +38,21 @@ function Card({
             </div>
           </div>
           <div className="rating">
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
-            <i className="fa fa-star"></i>
+            {[...Array(maxRating)].map((el, index) => {
+              return (
+                <i
+                  className={`fa fa-star${
+                    index + 1 <= rating ? ' selected-star' : ''
+                  }`}
+                  key={index}
+                ></i>
+              );
+            })}
           </div>
         </div>
       </div>
       <div className="card-back">
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Ingredient</th>
-              <th>Amount</th>
-              <th>Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ingredients.map((ingredient) => {
-              return (
-                <tr key={ingredient.name}>
-                  <td>{ingredient.name}</td>
-                  <td>{ingredient.amount}</td>
-                  <td>{ingredient.unit}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <IngredientList ingredients={ingredients} />
       </div>
     </div>
   );

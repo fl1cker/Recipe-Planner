@@ -1,0 +1,31 @@
+.table,
+.table-body {
+  width: 100%;
+  max-height: 100%;
+}
+
+.table-body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.table-row {
+  line-height: 20px;
+}
+
+.name,
+.amount,
+.unit {
+  padding: 5px;
+  height: 30px;
+  text-align: left;
+}
+
+.name {
+  width: 60%;
+}
+
+.amount,
+.unit {
+  width: 20%;
+}
