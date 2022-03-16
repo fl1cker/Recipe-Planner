@@ -1,0 +1,153 @@
+.card-wrapper {
+  width: 250px;
+  height: 400px;
+
+  position: relative;
+}
+
+.card-front,
+.card-back {
+  border: 8px solid transparent;
+  border-radius: 16px;
+  border-image: radial-gradient(circle, grey 30%, white 50%, grey 80%) 30;
+  -webkit-clip-path: ellipse(67% 75% at 50% 50%);
+  clip-path: ellipse(65% 75% at 50% 50%);
+  transition: transform 1s ease-in-out;
+}
+
+.card-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 2px 2px;
+  backface-visibility: hidden;
+  transform: rotate3d(0, 0, 0, 0);
+}
+
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+  display: block;
+  border-radius: 5px 5px 2px 2px;
+  backface-visibility: hidden;
+  transform: rotate3d(0, 1, 0, 180deg);
+}
+
+.card-wrapper:hover .card-front {
+  transform: rotateY(180deg);
+}
+
+.card-wrapper:hover .card-back {
+  transform: rotateY(0deg);
+}
+
+.food-image {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: 4px solid transparent;
+  border-image: radial-gradient(circle, grey 30%, white 50%, grey 80%) 30;
+  -webkit-clip-path: ellipse(72% 67% at 50% 50%);
+  clip-path: ellipse(72% 67% at 50% 50%);
+}
+
+.figure {
+  box-sizing: border-box;
+  margin: 7px 0 0 0;
+  width: 80%;
+  height: 45%;
+  justify-content: center;
+  align-self: center;
+}
+
+figcaption {
+  font-style: italic;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.bar {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 80%;
+  height: 1px;
+  background-color: black;
+  align-self: center;
+}
+
+.title {
+  width: 80%;
+  font-size: 1rem;
+  margin: 2.5% auto;
+  color: teal;
+  text-shadow: cyan 1px 1px;
+  position: relative;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  top: 0;
+  content: '\2668';
+  color: orangered;
+  width: 15px;
+  height: 15px;
+  text-shadow: yellow 1px 1px;
+}
+
+.title::before {
+  left: -20px;
+}
+
+.title::after {
+  right: -20px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 33%;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.rating > i {
+  display: block;
+  font-size: 3rem;
+}
+
+.details {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.times {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 50%;
+  width: 100%;
+}
+
+.prep-time,
+.completion-time {
+  flex-grow: 1;
+  height: 100%;
+  border: 1px solid black;
+  box-shadow: inset 2px 2px 1px 0 grey;
+  line-height: 2rem;
+  text-align: center;
+}
