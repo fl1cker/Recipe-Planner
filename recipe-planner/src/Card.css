@@ -1,7 +1,6 @@
 .card-wrapper {
   width: 250px;
   height: 400px;
-
   position: relative;
 }
 
@@ -42,6 +41,7 @@
   transform: rotate3d(0, 1, 0, 180deg);
 }
 
+/*
 .card-wrapper:hover .card-front {
   transform: rotateY(180deg);
 }
@@ -49,6 +49,7 @@
 .card-wrapper:hover .card-back {
   transform: rotateY(0deg);
 }
+*/
 
 .food-image {
   height: 100%;
@@ -63,7 +64,7 @@
 .figure {
   box-sizing: border-box;
   margin: 7px 0 0 0;
-  width: 80%;
+  width: 90%;
   height: 45%;
   justify-content: center;
   align-self: center;
@@ -116,7 +117,7 @@ figcaption {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 33%;
+  height: 38%;
   width: 100%;
   justify-content: space-around;
   align-items: flex-end;
@@ -131,14 +132,13 @@ figcaption {
   height: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .times {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 50%;
+  height: 62%;
   width: 100%;
 }
 
@@ -146,8 +146,10 @@ figcaption {
 .completion-time {
   flex-grow: 1;
   height: 100%;
-  border: 1px solid black;
-  box-shadow: inset 2px 2px 1px 0 grey;
   line-height: 2rem;
   text-align: center;
+}
+
+.time-description {
+  text-decoration: underline;
 }
