@@ -14,3 +14,16 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.day-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.day {
+  font-size: 5rem;
+  color: blue;
+}

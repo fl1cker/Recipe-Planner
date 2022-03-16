@@ -1,25 +1,37 @@
 import './Card.css';
 
-function Card() {
+function Card({
+  title,
+  prepTime,
+  completionTime,
+  rating,
+  ingredients,
+  imageSource,
+}) {
+  function handleCardClick(event) {
+    const el = event.currentTarget;
+    el.classList.toggle('selected');
+  }
+
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper" onClick={handleCardClick}>
       <div className="card-front">
         <figure className="figure">
-          <img className="food-image" src="pizza.jpg"></img>
+          <img className="food-image" src={imageSource}></img>
         </figure>
-        <div className="title">Acorn Squash Stuffed With Barley</div>
+        <div className="title">{title}</div>
         <div className="bar"></div>
         <div className="details">
           <div className="times">
             <div className="prep-time">
               <span className="time-description">Prep Time</span>
               <br />
-              15 min
+              {prepTime} min
             </div>
             <div className="completion-time">
               <span className="time-description">Completion Time</span>
               <br />
-              60 min
+              {completionTime} min
             </div>
           </div>
           <div className="rating">
@@ -41,16 +53,15 @@ function Card() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Fucks</td>
-              <td>0</td>
-              <td>To Give</td>
-            </tr>
-            <tr>
-              <td>Time</td>
-              <td>0</td>
-              <td>To Put Up With Your Shit</td>
-            </tr>
+            {ingredients.map((ingredient) => {
+              return (
+                <tr key={ingredient.name}>
+                  <td>{ingredient.name}</td>
+                  <td>{ingredient.amount}</td>
+                  <td>{ingredient.unit}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -12,6 +12,7 @@
   -webkit-clip-path: ellipse(67% 75% at 50% 50%);
   clip-path: ellipse(65% 75% at 50% 50%);
   transition: transform 1s ease-in-out;
+  transform-style: preserve-3d;
 }
 
 .card-front {
@@ -41,15 +42,13 @@
   transform: rotate3d(0, 1, 0, 180deg);
 }
 
-/*
-.card-wrapper:hover .card-front {
+.card-wrapper.selected .card-front {
   transform: rotateY(180deg);
 }
 
-.card-wrapper:hover .card-back {
+.card-wrapper.selected .card-back {
   transform: rotateY(0deg);
 }
-*/
 
 .food-image {
   height: 100%;
