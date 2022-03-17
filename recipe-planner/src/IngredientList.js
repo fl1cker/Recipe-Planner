@@ -9,7 +9,7 @@ function IngredientList({ ingredients }) {
             <tr className="table-row" key={name}>
               <td className="name">{name}</td>
               <td className="amount">
-                {amount} {unit}
+                {amount || ''} {unit}
               </td>
             </tr>
           );

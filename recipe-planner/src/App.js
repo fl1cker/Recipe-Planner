@@ -1,48 +1,36 @@
 import './App.css';
 import Card from './Card.js';
+import { SampleData } from './temp/sample-data';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-const cardData = {
-  title: 'Acorn Squash Stuffed With Barley',
-  imageSource: 'pizza.jpg',
-  prepTime: '15',
-  completionTime: '60',
-  levelOfEffort: 2,
-  tasteRating: 3,
-  recipeSource: {
-    sourceType: 'book',
-    location: 'Born To Cook like a dude man guy fo real',
-    details: 'pg. 45',
-  },
-  ingredients: [
-    {
-      name: 'Vegetable Oil',
-      amount: 4,
-      unit: 'fl oz',
-    },
-    {
-      name: 'Cookie Dough',
-      amount: 2,
-      unit: 'oz',
-    },
-  ],
-};
 
 function App() {
+  let cardData = fetchRandomData();
+  console.log(cardData);
+
   return (
     <div className="app">
       <div className="cards">
-        {daysOfTheWeek.slice(0, 5).map((day) => {
+        {daysOfTheWeek.slice(0, 7).map((day, index) => {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
-              <Card {...cardData} />
+              <Card {...cardData[index]} />
             </div>
           );
         })}
       </div>
     </div>
   );
+}
+
+function fetchRandomData() {
+  const data = [];
+  for (let i = 0; i < 7; i++) {
+    data.push(Math.random() <= 0.5 ? SampleData[0] : SampleData[1]);
+  }
+
+  return data;
 }
 
 export default App;
