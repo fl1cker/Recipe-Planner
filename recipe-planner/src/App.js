@@ -1,5 +1,5 @@
 import './App.css';
-import Card from './Card.js';
+import Card from './RecipeCard/Card';
 import { SampleData } from './temp/sample-data';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];

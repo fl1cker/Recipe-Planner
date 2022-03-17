@@ -1,7 +1,8 @@
 import './Card.css';
 import IngredientList from './IngredientList';
+import RecipeAttribute from './RecipeAttribute';
+import RecipeRating from './RecipeRating';
 
-const maxRating = 5;
 const websiteRegex = /:\/\/(.*?)\//;
 
 function Card({
@@ -59,44 +60,22 @@ function Card({
         <div className="title">{title}</div>
         <div className="bar"></div>
         <div className="details">
-          <div className="attribute">
-            <span className="label">Prep Time</span>:&nbsp;
-            {prepTime}&nbsp;min
-          </div>
-          <div className="attribute">
-            <span className="label">Completion Time</span>:&nbsp;
-            {completionTime}&nbsp;min
-          </div>
-          <div className="attribute">
-            <span className="label">Level of Effort</span>:&nbsp;
-            <span className="ratings">
-              {[...Array(maxRating)].map((el, index) => {
-                return (
-                  <i
-                    className={`fa fa-star${
-                      index + 1 <= levelOfEffort ? ' selected-star' : ''
-                    }`}
-                    key={index}
-                  ></i>
-                );
-              })}
-            </span>
-          </div>
-          <div className="attribute">
-            <span className="label">Flavor</span>:&nbsp;
-            <span className="ratings">
-              {[...Array(maxRating)].map((el, index) => {
-                return (
-                  <i
-                    className={`fa fa-star${
-                      index + 1 <= tasteRating ? ' selected-star' : ''
-                    }`}
-                    key={index}
-                  ></i>
-                );
-              })}
-            </span>
-          </div>
+          <RecipeAttribute
+            label="Prep Time"
+            value={prepTime}
+            description="min"
+          />
+          <RecipeAttribute
+            label="Completion Time"
+            value={completionTime}
+            description="min"
+          />
+          <RecipeRating
+            label="Level Of Effort"
+            maxRating="5"
+            rating={levelOfEffort}
+          />
+          <RecipeRating label="Flavor" maxRating="5" rating={tasteRating} />
           <div className="attribute">
             <span className="label">Source</span>:&nbsp;
             {displaySource()}
