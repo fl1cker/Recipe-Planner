@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import Card from './Card.js';
+import Card2 from './Card2.js';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const cardData = {
@@ -8,7 +8,8 @@ const cardData = {
   imageSource: 'pizza.jpg',
   prepTime: '15',
   completionTime: '60',
-  rating: 3,
+  levelOfEffort: 2,
+  tasteRating: 3,
   ingredients: [
     {
       name: 'Vegetable Oil',

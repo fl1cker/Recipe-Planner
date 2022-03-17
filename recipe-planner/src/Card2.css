@@ -101,6 +101,16 @@ figcaption {
   right: -20px;
 }
 
+.attribute {
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+
+.label {
+  text-decoration: underline;
+}
+
 .ratings {
   display: flex;
   flex-direction: row;
@@ -111,51 +121,15 @@ figcaption {
   align-items: flex-end;
 }
 
-.ratings > i {
+.ratings i {
   display: block;
-  font-size: 3rem;
+  font-size: 1rem;
   color: grey;
   text-shadow: 0 0 3px grey;
-}
-
-.details {
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-.times {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  height: 62%;
-  width: 100%;
-}
-
-.prep-time,
-.completion-time {
-  flex-grow: 1;
-  height: 100%;
-  line-height: 2rem;
-  text-align: center;
-}
-
-.time-description {
-  text-decoration: underline;
 }
 
 .ratings i.selected-star {
   color: gold;
   text-shadow: 0 0 3px black;
-  font-size: 1rem;
-}
-
-.rating-description {
-  font-size: 1rem;
-  margin: 5px;
-}
-
-.ratings sup,
-.ratings sub {
   font-size: 1rem;
 }

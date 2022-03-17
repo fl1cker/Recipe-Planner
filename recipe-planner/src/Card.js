@@ -7,7 +7,8 @@ function Card({
   title,
   prepTime,
   completionTime,
-  rating,
+  levelOfEffort,
+  tasteRating,
   ingredients,
   imageSource,
 }) {
@@ -37,17 +38,17 @@ function Card({
               {completionTime} min
             </div>
           </div>
-          <div className="rating">
-            {[...Array(maxRating)].map((el, index) => {
-              return (
-                <i
-                  className={`fa fa-star${
-                    index + 1 <= rating ? ' selected-star' : ''
-                  }`}
-                  key={index}
-                ></i>
-              );
-            })}
+          <div className="ratings">
+            <div className="level-of-effort">
+              <span className="rating-description">LOE</span>
+              <sup>{levelOfEffort}</sup>&frasl;<sub>5</sub>
+              <i className="fa fa-star selected-star"></i>
+            </div>
+            <div className="taste-rating">
+              <span className="rating-description">Flavor</span>
+              <sup>{tasteRating}</sup>&frasl;<sub>5</sub>
+              <i className="fa fa-star selected-star"></i>
+            </div>
           </div>
         </div>
       </div>
