@@ -11,6 +11,7 @@ function Card({
   tasteRating,
   ingredients,
   imageSource,
+  recipeSource,
 }) {
   function handleCardClick(event) {
     const el = event.currentTarget;
@@ -26,29 +27,48 @@ function Card({
         <div className="title">{title}</div>
         <div className="bar"></div>
         <div className="details">
-          <div className="times">
-            <div className="prep-time">
-              <span className="time-description">Prep Time</span>
-              <br />
-              {prepTime} min
-            </div>
-            <div className="completion-time">
-              <span className="time-description">Completion Time</span>
-              <br />
-              {completionTime} min
-            </div>
+          <div className="attribute">
+            <span className="label">Prep Time</span>:&nbsp;
+            {prepTime}&nbsp;min
           </div>
-          <div className="ratings">
-            <div className="level-of-effort">
-              <span className="rating-description">LOE</span>
-              <sup>{levelOfEffort}</sup>&frasl;<sub>5</sub>
-              <i className="fa fa-star selected-star"></i>
-            </div>
-            <div className="taste-rating">
-              <span className="rating-description">Flavor</span>
-              <sup>{tasteRating}</sup>&frasl;<sub>5</sub>
-              <i className="fa fa-star selected-star"></i>
-            </div>
+          <div className="attribute">
+            <span className="label">Completion Time</span>:&nbsp;
+            {completionTime}&nbsp;min
+          </div>
+          <div className="attribute">
+            <span className="label">Level of Effort</span>:&nbsp;
+            <span className="ratings">
+              {[...Array(maxRating)].map((el, index) => {
+                return (
+                  <i
+                    className={`fa fa-star${
+                      index + 1 <= levelOfEffort ? ' selected-star' : ''
+                    }`}
+                    key={index}
+                  ></i>
+                );
+              })}
+            </span>
+          </div>
+          <div className="attribute">
+            <span className="label">Flavor</span>:&nbsp;
+            <span className="ratings">
+              {[...Array(maxRating)].map((el, index) => {
+                return (
+                  <i
+                    className={`fa fa-star${
+                      index + 1 <= tasteRating ? ' selected-star' : ''
+                    }`}
+                    key={index}
+                  ></i>
+                );
+              })}
+            </span>
+          </div>
+          <div className="attribute">
+            <span className="label">Source</span>:&nbsp;
+            <span className="location">{recipeSource.location}</span>
+            {recipeSource.details ? ` -- ${recipeSource.details}` : ''}
           </div>
         </div>
       </div>

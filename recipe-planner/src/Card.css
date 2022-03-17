@@ -1,7 +1,10 @@
 .card-wrapper {
   width: 250px;
+  max-width: 250px;
   height: 400px;
+  max-height: 400px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .card-wrapper.selected .card-front {
@@ -14,6 +17,7 @@
 
 .card-front,
 .card-back {
+  box-sizing: border-box;
   background-color: #fff;
   border: 8px solid transparent;
   border-radius: 16px;
@@ -22,6 +26,11 @@
   clip-path: ellipse(65% 75% at 50% 50%);
   transition: transform 1s ease-in-out;
   transform-style: preserve-3d;
+  max-width: 250px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 5px;
 }
 
 .card-front {
@@ -54,7 +63,8 @@
   box-sizing: border-box;
   margin: 7px 0 0 0;
   width: 90%;
-  height: 45%;
+  height: 40%;
+  min-height: 40%;
   justify-content: center;
   align-self: center;
 }
@@ -79,7 +89,7 @@ figcaption {
   margin-top: 5px;
   margin-bottom: 10px;
   width: 80%;
-  height: 1px;
+  min-height: 1px;
   background-color: black;
   align-self: center;
 }
@@ -101,47 +111,26 @@ figcaption {
   right: -20px;
 }
 
+.attribute {
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+
+.label {
+  text-decoration: underline;
+}
+
 .ratings {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  display: inline;
   height: 38%;
   width: 100%;
-  justify-content: space-between;
-  align-items: flex-end;
+  margin-left: 5px;
 }
 
-.ratings > i {
-  display: block;
-  font-size: 3rem;
-  color: grey;
-  text-shadow: 0 0 3px grey;
-}
-
-.details {
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-.times {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  height: 62%;
-  width: 100%;
-}
-
-.prep-time,
-.completion-time {
-  flex-grow: 1;
-  height: 100%;
-  line-height: 2rem;
-  text-align: center;
-}
-
-.time-description {
-  text-decoration: underline;
+.ratings i {
+  display: inline;
+  margin-left: 2px;
 }
 
 .ratings i.selected-star {
@@ -150,12 +139,6 @@ figcaption {
   font-size: 1rem;
 }
 
-.rating-description {
-  font-size: 1rem;
-  margin: 5px;
-}
-
-.ratings sup,
-.ratings sub {
-  font-size: 1rem;
+.location {
+  font-style: italic;
 }

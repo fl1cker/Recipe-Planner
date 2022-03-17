@@ -1,6 +1,5 @@
 import './App.css';
 import Card from './Card.js';
-import Card2 from './Card2.js';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const cardData = {
@@ -10,6 +9,11 @@ const cardData = {
   completionTime: '60',
   levelOfEffort: 2,
   tasteRating: 3,
+  recipeSource: {
+    sourceType: 'book',
+    location: 'Born To Cook like a dude man guy fo real',
+    details: 'pg. 45',
+  },
   ingredients: [
     {
       name: 'Vegetable Oil',
