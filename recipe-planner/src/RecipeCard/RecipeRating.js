@@ -6,7 +6,6 @@ function RecipeRating({ label, maxRating, rating }) {
       <span className="label">{label}</span>:&nbsp;
       <span className="ratings">
         {Array.from({ length: maxRating }).map((el, index) => {
-          console.log('in the map with ', index);
           return (
             <i
               className={`fa fa-star${

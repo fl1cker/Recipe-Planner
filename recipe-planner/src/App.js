@@ -6,7 +6,6 @@ const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 
 function App() {
   let cardData = fetchRandomData();
-  console.log(cardData);
 
   return (
     <div className="app">

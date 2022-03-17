@@ -2,8 +2,7 @@ import './Card.css';
 import IngredientList from './IngredientList';
 import RecipeAttribute from './RecipeAttribute';
 import RecipeRating from './RecipeRating';
-
-const websiteRegex = /:\/\/(.*?)\//;
+import RecipeSource from './RecipeSource';
 
 function Card({
   title,
@@ -18,37 +17,6 @@ function Card({
   function handleCardClick(event) {
     const el = event.currentTarget;
     el.classList.toggle('selected');
-  }
-
-  function displaySource() {
-    let location = '';
-
-    switch (recipeSource.sourceType.toLowerCase()) {
-      case 'website': {
-        location = websiteRegex.exec(recipeSource.location)[1];
-
-        return (
-          <a
-            className="location"
-            onClick={(e) => e.stopPropagation()}
-            href={recipeSource.location}
-            target="_blank"
-          >
-            {location}
-          </a>
-        );
-      }
-      case 'book': {
-        return (
-          <span className="location">
-            {recipeSource.location} - {recipeSource.details}
-          </span>
-        );
-      }
-      default: {
-        return <span className="location">{recipeSource.location}</span>;
-      }
-    }
   }
 
   return (
@@ -76,10 +44,7 @@ function Card({
             rating={levelOfEffort}
           />
           <RecipeRating label="Flavor" maxRating="5" rating={tasteRating} />
-          <div className="attribute">
-            <span className="label">Source</span>:&nbsp;
-            {displaySource()}
-          </div>
+          <RecipeSource {...recipeSource} />
         </div>
       </div>
       <div className="card-back">
