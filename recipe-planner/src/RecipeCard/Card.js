@@ -3,8 +3,9 @@ import IngredientList from './IngredientList';
 import RecipeAttribute from './RecipeAttribute';
 import RecipeRating from './RecipeRating';
 import RecipeSource from './RecipeSource';
+import CardButtons from './CardButtons';
 
-function Card({ cardData, refreshDay }) {
+function Card({ cardData, refreshDay, clearDay }) {
   const {
     title,
     prepTime,
@@ -14,7 +15,7 @@ function Card({ cardData, refreshDay }) {
     ingredients,
     imageSource,
     recipeSource,
-  } = cardData;
+  } = cardData || {};
 
   function handleCardClick(event) {
     const el = event.currentTarget;
@@ -23,7 +24,19 @@ function Card({ cardData, refreshDay }) {
 
   function handleRefreshClick(e) {
     e.stopPropagation();
+    const wrapper = e.currentTarget.closest('.card-wrapper');
+    wrapper.classList.add('skip-animation');
+    wrapper.classList.remove('selected');
+    setTimeout(() => {
+      wrapper.classList.remove('skip-animation');
+    }, 0.75);
     refreshDay();
+  }
+
+  function handleClearClick(e) {
+    console.log('handling clear');
+    e.stopPropagation();
+    clearDay();
   }
 
   return (
@@ -52,16 +65,19 @@ function Card({ cardData, refreshDay }) {
           />
           <RecipeRating label="Flavor" maxRating="5" rating={tasteRating} />
           <RecipeSource {...recipeSource} />
+          <CardButtons
+            refreshDay={handleRefreshClick}
+            clearDay={handleClearClick}
+          />
         </div>
       </div>
       <div className="card-back">
         <IngredientList ingredients={ingredients} />
+        <CardButtons
+          refreshDay={handleRefreshClick}
+          clearDay={handleClearClick}
+        />
       </div>
-      <i
-        className="fa fa-refresh card-button card-button-refresh"
-        onClick={handleRefreshClick}
-      ></i>
-      <i className="fa fa-trash card-button card-button-clear"></i>
     </div>
   );
 }

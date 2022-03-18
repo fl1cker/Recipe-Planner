@@ -1,0 +1,15 @@
+.card-button {
+  position: absolute;
+  top: 8px;
+  color: black;
+  background-color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.card-button.card-button-refresh {
+  right: 8px;
+}
+.card-button.card-button-clear {
+  left: 8px;
+}

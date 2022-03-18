@@ -3,11 +3,14 @@
   width: 100%;
   max-height: 100%;
   border-collapse: collapse;
+  margin-top: 12px;
+  box-sizing: border-box;
 }
 
 .table-body {
   overflow-x: hidden;
   overflow-y: scroll;
+  border: 1px solid grey;
 }
 
 .table-row {
@@ -19,7 +22,7 @@
   padding: 5px;
   height: 30px;
   text-align: left;
-  border-bottom: 1px solid grey;
+  border: 1px solid grey;
 }
 
 .name {
@@ -29,5 +32,4 @@
 .amount {
   width: 30%;
   text-align: right;
-  border-left: 1px solid grey;
 }

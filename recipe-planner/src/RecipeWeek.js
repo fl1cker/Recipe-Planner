@@ -2,6 +2,7 @@ import './RecipeWeek.css';
 import Card from './RecipeCard/Card';
 import { SampleData } from './temp/sample-data';
 import { useState } from 'react';
+import EmptyCardContents from './RecipeCard/EmptyCardContents';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 
@@ -10,6 +11,14 @@ function RecipeWeek() {
 
   function handleRefreshDayClick(index) {
     cardData[index] = getRandomMeal();
+
+    const newData = [...cardData];
+    setCardData(newData);
+  }
+
+  function handleClearDayClick(index) {
+    console.log('handling in RecipeWeek');
+    cardData[index] = null;
 
     const newData = [...cardData];
     setCardData(newData);
@@ -26,10 +35,17 @@ function RecipeWeek() {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
-              <Card
-                cardData={cardData[index]}
-                refreshDay={() => handleRefreshDayClick(index)}
-              />
+              {cardData[index] ? (
+                <Card
+                  cardData={cardData[index]}
+                  refreshDay={() => handleRefreshDayClick(index)}
+                  clearDay={() => handleClearDayClick(index)}
+                />
+              ) : (
+                <EmptyCardContents
+                  refreshDay={() => handleRefreshDayClick(index)}
+                />
+              )}
             </div>
           );
         })}
