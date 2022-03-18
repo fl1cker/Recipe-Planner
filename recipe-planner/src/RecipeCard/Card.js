@@ -24,12 +24,7 @@ function Card({ cardData, refreshDay, clearDay }) {
 
   function handleRefreshClick(e) {
     e.stopPropagation();
-    const wrapper = e.currentTarget.closest('.card-wrapper');
-    wrapper.classList.add('skip-animation');
-    wrapper.classList.remove('selected');
-    setTimeout(() => {
-      wrapper.classList.remove('skip-animation');
-    }, 0.75);
+    e.currentTarget.closest('.card-wrapper').classList.remove('selected');
     refreshDay();
   }
 

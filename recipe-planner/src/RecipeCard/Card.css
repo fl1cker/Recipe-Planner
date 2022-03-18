@@ -9,12 +9,10 @@
 
 .card-wrapper.selected .card-front {
   transform: rotateY(180deg);
-  transition: transform 0.75s ease-in;
 }
 
-.card-wrapper.selected:not(.skip-animation) .card-back {
+.card-wrapper.selected .card-back {
   transform: rotateY(0deg);
-  transition: transform 0.75s ease-in;
 }
 
 .card-front,
@@ -27,6 +25,7 @@
   border-image: radial-gradient(circle, grey 30%, white 50%, grey 80%) 30;
   -webkit-clip-path: ellipse(67% 75% at 50% 50%);
   clip-path: ellipse(65% 75% at 50% 50%);
+  transition: transform 0.75s ease-in;
   transform-style: preserve-3d;
   max-width: 250px;
   max-height: 400px;
