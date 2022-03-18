@@ -1,5 +1,3 @@
-import './RecipeSource.css';
-
 const websiteRegex = /:\/\/(.*?)\//;
 
 function RecipeSource({ sourceType, location, details }) {

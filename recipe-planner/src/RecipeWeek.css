@@ -1,0 +1,33 @@
+.cards {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin-left: 60px;
+  row-gap: 20px;
+}
+
+.day-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: no-wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.day {
+  font-size: 5rem;
+  color: cyan;
+  text-shadow: teal 1px 1px;
+}
+
+.date-range-header {
+  margin-left: 15px;
+}
+
+.date-range {
+  letter-spacing: -2.5px;
+}

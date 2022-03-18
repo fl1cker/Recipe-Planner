@@ -4,19 +4,26 @@ import RecipeAttribute from './RecipeAttribute';
 import RecipeRating from './RecipeRating';
 import RecipeSource from './RecipeSource';
 
-function Card({
-  title,
-  prepTime,
-  completionTime,
-  levelOfEffort,
-  tasteRating,
-  ingredients,
-  imageSource,
-  recipeSource,
-}) {
+function Card({ cardData, refreshDay }) {
+  const {
+    title,
+    prepTime,
+    completionTime,
+    levelOfEffort,
+    tasteRating,
+    ingredients,
+    imageSource,
+    recipeSource,
+  } = cardData;
+
   function handleCardClick(event) {
     const el = event.currentTarget;
     el.classList.toggle('selected');
+  }
+
+  function handleRefreshClick(e) {
+    e.stopPropagation();
+    refreshDay();
   }
 
   return (
@@ -50,6 +57,11 @@ function Card({
       <div className="card-back">
         <IngredientList ingredients={ingredients} />
       </div>
+      <i
+        className="fa fa-refresh card-button card-button-refresh"
+        onClick={handleRefreshClick}
+      ></i>
+      <i className="fa fa-trash card-button card-button-clear"></i>
     </div>
   );
 }
