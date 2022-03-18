@@ -29,7 +29,6 @@ function Card({ cardData, refreshDay, clearDay }) {
   }
 
   function handleClearClick(e) {
-    console.log('handling clear');
     e.stopPropagation();
     clearDay();
   }

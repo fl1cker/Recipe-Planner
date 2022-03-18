@@ -17,7 +17,6 @@ function RecipeWeek() {
   }
 
   function handleClearDayClick(index) {
-    console.log('handling in RecipeWeek');
     cardData[index] = null;
 
     const newData = [...cardData];
