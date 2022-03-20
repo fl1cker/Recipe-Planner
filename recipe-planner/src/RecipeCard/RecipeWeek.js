@@ -4,8 +4,7 @@ import { SampleData } from '../temp/sample-data';
 import { useState } from 'react';
 import EmptyCardContents from './EmptyCardContents';
 import SummaryPanel from './SummaryPanel';
-
-const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+import { DaysOfWeek } from '../models/DaysOfWeek';
 
 function RecipeWeek() {
   const [cardData, setCardData] = useState(populateWeek(7));
@@ -54,7 +53,7 @@ function RecipeWeek() {
         </button>
       </div>
       <div className="cards">
-        {daysOfTheWeek.map((day, index) => {
+        {DaysOfWeek.map((day, index) => {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
@@ -75,7 +74,6 @@ function RecipeWeek() {
       </div>
       <div className="summary-panel">
         <SummaryPanel
-          daysOfTheWeek={daysOfTheWeek}
           cardData={cardData}
           closePanel={handleClosePanel}
           submit={handleSubmit}

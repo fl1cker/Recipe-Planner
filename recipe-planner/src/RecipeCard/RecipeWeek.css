@@ -1,6 +1,7 @@
 .recipe-week-wrapper {
   position: relative;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .cards {
