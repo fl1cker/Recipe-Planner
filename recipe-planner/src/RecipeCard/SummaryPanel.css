@@ -1,0 +1,92 @@
+.summary-wrapper {
+  display: inline-block;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.summary-wrapper:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0px;
+  background-color: rgba(15, 15, 15, 0.2);
+  cursor: not-allowed;
+}
+
+.summary-wrapper.show:before {
+  width: calc(100vw - 100%);
+  left: calc(-1 * (100vw - 100%));
+  transition: width 1s ease;
+}
+
+.summary-wrapper > .header {
+  font-size: 1.2rem;
+  margin: 5px;
+}
+
+.summary-wrapper > i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  background-color: lightgray;
+}
+
+.days-of-week {
+  margin-left: 5px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.day-of-week {
+  font-size: 1.5rem;
+  color: teal;
+  text-shadow: 1px 1px cyan;
+}
+
+.day-of-week,
+.meal-title {
+  padding: 5px;
+}
+
+.ingredient-breakdown-day {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline;
+  color: blue;
+  letter-spacing: 1.5px;
+}
+
+.ingredient-breakdown-day-amount {
+  position: absolute;
+  display: none;
+  top: calc(-1rem - 15px);
+  left: 15%;
+  background-color: #eee;
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 5px;
+  color: teal;
+  text-shadow: 1px 1px cyan;
+}
+
+.ingredient-breakdown-day:hover .ingredient-breakdown-day-amount {
+  display: block;
+}
+
+.ingredient-breakdown-day-amount:before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 2px;
+  border-top: 8px solid #eee;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-radius: 5px;
+}

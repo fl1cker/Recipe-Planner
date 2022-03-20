@@ -15,7 +15,7 @@ export const SampleData = [
       {
         name: 'Vegetable Oil',
         amount: 4,
-        unit: 'fl oz',
+        unit: 'fl-oz',
       },
       {
         name: 'Cookie Dough',
@@ -40,31 +40,27 @@ export const SampleData = [
       {
         name: 'Vegetable Broth',
         amount: 4,
-        unit: 'cups',
+        unit: 'cup',
       },
       {
         name: 'Carrots',
         amount: 2,
-        unit: 'units',
+        unit: 'unit',
       },
       {
         name: 'Broccoli',
         amount: 2,
-        unit: 'units',
+        unit: 'unit',
       },
       {
         name: 'Mushrooms',
         amount: 2,
-        unit: 'cups',
+        unit: 'cup',
       },
       {
         name: 'Egg',
         amount: 2,
-        unit: 'units',
-      },
-      {
-        name: 'Salt',
-        unit: 'to taste',
+        unit: 'unit',
       },
     ],
   },

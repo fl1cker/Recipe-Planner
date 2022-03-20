@@ -1,5 +1,5 @@
 import './App.css';
-import RecipeWeek from './RecipeWeek';
+import RecipeWeek from './RecipeCard/RecipeWeek';
 
 function App() {
   return (

@@ -1,13 +1,15 @@
 import './RecipeWeek.css';
-import Card from './RecipeCard/Card';
-import { SampleData } from './temp/sample-data';
+import Card from './Card';
+import { SampleData } from '../temp/sample-data';
 import { useState } from 'react';
-import EmptyCardContents from './RecipeCard/EmptyCardContents';
+import EmptyCardContents from './EmptyCardContents';
+import SummaryPanel from './SummaryPanel';
 
 const daysOfTheWeek = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 
 function RecipeWeek() {
   const [cardData, setCardData] = useState(populateWeek(7));
+  const [showSummary, setShowSummary] = useState(false);
 
   function handleRefreshDayClick(index) {
     cardData[index] = getRandomMeal();
@@ -23,14 +25,36 @@ function RecipeWeek() {
     setCardData(newData);
   }
 
+  function handleFinalizeClick() {
+    document.querySelector('.summary-panel').classList.add('show');
+    setShowSummary(true);
+  }
+
+  function handleClosePanel() {
+    document.querySelector('.summary-panel').classList.remove('show');
+    setShowSummary(true);
+  }
+
+  function handleSubmit() {
+    console.log('submitting');
+    handleClosePanel();
+  }
+
   return (
-    <>
-      <h1 className="date-range-header">
+    <div className="recipe-week-wrapper">
+      <div className="date-range-header">
         Weekly Recipe:&nbsp;
         <span className="date-range">{getDateRangeFromThisWeek()}</span>
-      </h1>
+        <button
+          type="button"
+          className="finalize-button"
+          onClick={handleFinalizeClick}
+        >
+          Finalize
+        </button>
+      </div>
       <div className="cards">
-        {daysOfTheWeek.slice(0, 7).map((day, index) => {
+        {daysOfTheWeek.map((day, index) => {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
@@ -49,7 +73,16 @@ function RecipeWeek() {
           );
         })}
       </div>
-    </>
+      <div className="summary-panel">
+        <SummaryPanel
+          daysOfTheWeek={daysOfTheWeek}
+          cardData={cardData}
+          closePanel={handleClosePanel}
+          submit={handleSubmit}
+          isVisible={showSummary}
+        />
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,68 @@
+.recipe-week-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.cards {
+  margin: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin-left: 60px;
+  margin-bottom: 0;
+  row-gap: 20px;
+}
+
+.day-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: no-wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.day {
+  font-size: 5rem;
+  color: cyan;
+  text-shadow: teal 1px 1px;
+}
+
+.date-range-header {
+  margin-left: 15px;
+  height: 3rem;
+  font-size: 2rem;
+}
+
+.date-range {
+  letter-spacing: -2.5px;
+}
+
+.finalize-button {
+  position: absolute;
+  top: 2px;
+  right: 15px;
+  font-size: 2rem;
+  background-image: linear-gradient(to bottom right, cyan, teal);
+  border-color: teal;
+}
+
+.summary-panel {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 45%;
+  right: -45%;
+  transition: transform 0.4s ease-in-out;
+  border: 12px solid transparent;
+  background-image: radial-gradient(circle, cyan, teal);
+  -webkit-clip-path: ellipse(67% 75% at 50% 50%);
+  clip-path: ellipse(70% 71%);
+  box-sizing: border-box;
+}
+
+.summary-panel.show {
+  transform: translateX(-45vw);
+}
