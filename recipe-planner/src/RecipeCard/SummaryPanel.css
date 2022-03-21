@@ -46,8 +46,8 @@
 
 .day-of-week {
   font-size: 1.5rem;
-  color: teal;
-  text-shadow: 1px 1px cyan;
+  color: var(--primary-font-color);
+  text-shadow: var(--primary-text-shadow);
 }
 
 .day-of-week,
@@ -58,7 +58,7 @@
 .ingredient-breakdown-day {
   position: relative;
   display: inline-block;
-  text-decoration: underline;
+
   color: blue;
   letter-spacing: 1.5px;
 }
@@ -72,8 +72,8 @@
   white-space: nowrap;
   padding: 5px;
   border-radius: 5px;
-  color: teal;
-  text-shadow: 1px 1px cyan;
+  color: var(--primary-font-color);
+  text-shadow: var(--primary-text-shadow);
 }
 
 .ingredient-breakdown-day:hover .ingredient-breakdown-day-amount {

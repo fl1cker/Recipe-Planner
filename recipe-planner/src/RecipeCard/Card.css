@@ -99,8 +99,8 @@ figcaption {
   width: 80%;
   font-size: 1rem;
   margin: 2.5% auto;
-  color: teal;
-  text-shadow: cyan 1px 1px;
+  color: var(--primary-font-color);
+  text-shadow: var(--primary-text-shadow);
   position: relative;
 }
 

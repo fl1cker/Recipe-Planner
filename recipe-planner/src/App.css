@@ -4,4 +4,6 @@
   padding: 0;
   background-image: linear-gradient(to bottom right, red, blue);
   max-width: 100vw;
+  --primary-font-color: teal;
+  --primary-text-shadow: 1px 1px cyan;
 }

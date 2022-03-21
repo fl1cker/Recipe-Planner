@@ -120,7 +120,6 @@ function SummaryIngredientsList({ cardData }) {
                   {ingredient.days?.map((day, index) => [
                     <div className="ingredient-breakdown-day" key={day}>
                       [{getNamedDayFromIndex(day)}]
-                      {index + 1 === ingredient.days.length ? '' : ', '}
                       {insertIngredientDetailsForDay(ingredient.name, day)}
                     </div>,
                   ])}

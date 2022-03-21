@@ -47,7 +47,7 @@
   right: 15px;
   font-size: 2rem;
   background-image: linear-gradient(to bottom right, cyan, teal);
-  border-color: teal;
+  border-color: var(--primary-font-color);
 }
 
 .summary-panel {
