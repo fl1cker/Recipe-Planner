@@ -1,14 +1,13 @@
 import './RecipeWeek.css';
 import Card from './Card';
-import { SampleData } from '../temp/sample-data';
+import { SampleData } from '../../temp/sample-data';
 import { useState } from 'react';
 import EmptyCardContents from './EmptyCardContents';
 import SummaryPanel from './SummaryPanel';
-import { DaysOfWeek } from '../models/DaysOfWeek';
+import { DaysOfWeek } from '../../models/DaysOfWeek';
 
 function RecipeWeek() {
   const [cardData, setCardData] = useState(populateWeek(7));
-  const [showSummary, setShowSummary] = useState(false);
 
   function handleRefreshDayClick(index) {
     cardData[index] = getRandomMeal();
@@ -26,12 +25,10 @@ function RecipeWeek() {
 
   function handleFinalizeClick() {
     document.querySelector('.summary-panel').classList.add('show');
-    setShowSummary(true);
   }
 
   function handleClosePanel() {
     document.querySelector('.summary-panel').classList.remove('show');
-    setShowSummary(true);
   }
 
   function handleSubmit() {

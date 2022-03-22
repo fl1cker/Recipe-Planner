@@ -1,4 +1,4 @@
-import { sortByName } from '../helper-functions';
+import { sortByName } from '../../helper-functions';
 import './IngredientList.css';
 
 function IngredientList({ ingredients }) {

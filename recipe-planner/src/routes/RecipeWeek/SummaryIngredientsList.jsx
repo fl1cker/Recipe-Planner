@@ -1,6 +1,6 @@
 import './SummaryIngredientsList.css';
-import { getNamedDayFromIndex } from '../models/DaysOfWeek';
-import { sortByName } from '../helper-functions';
+import { getNamedDayFromIndex } from '../../models/DaysOfWeek';
+import { sortByName } from '../../helper-functions';
 
 const convert = require('convert-units');
 const keySplit = '|';

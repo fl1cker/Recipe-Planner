@@ -3,7 +3,13 @@
   margin: 0;
   padding: 0;
   background-image: linear-gradient(to bottom right, red, blue);
-  max-width: 100vw;
+  min-width: 100vw;
+  min-height: 100vh;
   --primary-font-color: teal;
   --primary-text-shadow: 1px 1px cyan;
+}
+
+.app {
+  min-width: 100%;
+  min-height: 100%;
 }

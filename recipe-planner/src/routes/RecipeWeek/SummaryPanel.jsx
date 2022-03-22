@@ -1,4 +1,4 @@
-import { DaysOfWeek } from '../models/DaysOfWeek';
+import { DaysOfWeek } from '../../models/DaysOfWeek';
 import SummaryIngredientsList from './SummaryIngredientsList';
 import './SummaryPanel.css';
 
