@@ -113,7 +113,10 @@ function SummaryIngredientsList({ cardData }) {
         <tbody>
           {ingredientAggregateList.sort(sortByName).map((ingredient) => {
             return (
-              <tr key={`${ingredient.name}${keySplit}${ingredient.unit}`}>
+              <tr
+                className="ingredient-breakdown-row"
+                key={`${ingredient.name}${keySplit}${ingredient.unit}`}
+              >
                 <td>{ingredient.name}</td>
                 <td>{`${ingredient.amount} ${ingredient.unit}(s)`}</td>
                 <td>

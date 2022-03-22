@@ -77,7 +77,6 @@ function RecipeWeek() {
           cardData={cardData}
           closePanel={handleClosePanel}
           submit={handleSubmit}
-          isVisible={showSummary}
         />
       </div>
     </div>
