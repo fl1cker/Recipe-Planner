@@ -37,13 +37,17 @@
   font-size: 2rem;
 }
 
+.date-range-header {
+  margin-top: 17px;
+}
+
 .date-range {
   letter-spacing: -2.5px;
 }
 
 .finalize-button {
   position: absolute;
-  top: 2px;
+  top: 14px;
   right: 15px;
   font-size: 2rem;
   background-image: linear-gradient(to bottom right, cyan, teal);

@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'font-awesome/css/font-awesome.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RecipeWeek from './routes/RecipeWeek/RecipeWeek';
+import HeaderBar from './HeaderBar';
+import './index.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <HeaderBar />
       <Routes>
-        <Route path="/" element={<App />} />
-        {<Route path="recipe-week" element={<RecipeWeek />} />}
+        <Route path="recipe-week" element={<RecipeWeek />} />
         <Route
           path="*"
           element={
