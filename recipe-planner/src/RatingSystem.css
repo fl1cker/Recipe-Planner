@@ -15,8 +15,8 @@
   font-size: 1rem;
 }
 
-.ratings-container li:hover,
-.ratings-container li:hover ~ li {
+.ratings-container.editable li:hover,
+.ratings-container.editable li:hover ~ li {
   color: gold;
 }
 
