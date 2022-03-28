@@ -39,7 +39,7 @@ function RecipeWeek() {
   return (
     <div className="recipe-week-wrapper">
       <div className="date-range-header">
-        Weekly Recipe:&nbsp;
+        This Week's Recipes:&nbsp;
         <span className="date-range">{getDateRangeFromThisWeek()}</span>
         <button
           type="button"

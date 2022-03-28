@@ -1,5 +1,6 @@
 export const SampleData = [
   {
+    id: 0,
     title: 'Acorn Squash Stuffed With Barley',
     imageSource: 'pizza.jpg',
     prepTime: '15',
@@ -25,6 +26,7 @@ export const SampleData = [
     ],
   },
   {
+    id: 1,
     title: 'That Soup Thing You Like',
     imageSource: 'soup.jpeg',
     prepTime: '10',

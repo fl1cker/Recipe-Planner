@@ -4,8 +4,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RecipeWeek from './routes/RecipeWeek/RecipeWeek';
 import HeaderBar from './HeaderBar';
+import RecipeManager from './routes/RecipeManager/RecipeManager';
 import './index.css';
 import 'font-awesome/css/font-awesome.min.css';
+
+import TestPage from './TestPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +16,8 @@ ReactDOM.render(
       <HeaderBar />
       <Routes>
         <Route path="recipe-week" element={<RecipeWeek />} />
+        <Route path="recipe-manager" element={<RecipeManager />} />
+        <Route path="test-page" element={<TestPage />} />
         <Route
           path="*"
           element={

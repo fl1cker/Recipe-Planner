@@ -1,0 +1,26 @@
+.ratings-container {
+  display: inline-block;
+  height: 2.5rem;
+  background-color: green;
+  list-style: none;
+  direction: rtl;
+}
+
+.ratings-container li {
+  padding: 10px 5px;
+  color: lightgray;
+}
+
+.ratings-container i {
+  font-size: 1rem;
+}
+
+.ratings-container li:hover,
+.ratings-container li:hover ~ li {
+  color: gold;
+}
+
+.ratings-container i.selected-star {
+  color: gold;
+  text-shadow: 0 0 3px black;
+}

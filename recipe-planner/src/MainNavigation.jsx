@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import HeaderBar from './HeaderBar';
 import './MainNavigation.css';
 
 function MainNavigation() {
@@ -20,6 +19,9 @@ function MainNavigation() {
         </li>
         <li>
           <Link to="/recipe-manager">Manage Recipes</Link>
+        </li>
+        <li>
+          <Link to="/test-page">Test Page</Link>
         </li>
       </ul>
     </nav>

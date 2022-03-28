@@ -1,7 +1,7 @@
 import './Card.css';
 import IngredientList from './IngredientList';
 import RecipeAttribute from './RecipeAttribute';
-import RecipeRating from './RecipeRating';
+import RatingSystem from '../../RatingSystem';
 import RecipeSource from './RecipeSource';
 import CardButtons from './CardButtons';
 
@@ -52,12 +52,19 @@ function Card({ cardData, refreshDay, clearDay }) {
             value={completionTime}
             description="min"
           />
-          <RecipeRating
-            label="Level Of Effort"
-            maxRating="5"
-            rating={levelOfEffort}
-          />
-          <RecipeRating label="Flavor" maxRating="5" rating={tasteRating} />
+          <div className="attribute">
+            <span className="label">Level Of Effort</span>:&nbsp;
+            <RatingSystem
+              label=""
+              maxRating="5"
+              currentRating={levelOfEffort}
+            />
+          </div>
+          <div className="attribute">
+            <span className="label">Flavor</span>:&nbsp;
+            <RatingSystem maxRating="5" currentRating={tasteRating} />
+          </div>
+
           <RecipeSource {...recipeSource} />
           <CardButtons
             refreshDay={handleRefreshClick}

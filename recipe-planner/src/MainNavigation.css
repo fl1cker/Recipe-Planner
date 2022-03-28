@@ -31,7 +31,7 @@
 
 .nav-list > li:not(:first-of-type) > a {
   color: #fff;
-  text-shadow: 1px 1px lightgray;
+  text-shadow: 0.5px 0.5px lightgray;
   text-decoration: none;
 }
 
