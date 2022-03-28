@@ -1,18 +1,25 @@
 import './RatingSystem.css';
 
-function RatingSystem({ currentRating, maxRating, isEditable }) {
-  const emptyArray = Array.from({ length: maxRating });
+function RatingSystem({ currentRating, maxRating, isEditable, updateRating }) {
+  function handleRatingClick(e, index) {
+    e.preventDefault();
+    if (!isEditable) return;
+    const starNumber = getStarNumber(index);
+    updateRating(starNumber);
+  }
+
+  function getStarNumber(elementIndex) {
+    return Math.abs(elementIndex - maxRating);
+  }
 
   return (
     <ul className={`ratings-container${isEditable ? ' editable' : ''}`}>
       {Array.from({ length: maxRating }).map((_, index) => {
         return (
-          <li key={index}>
+          <li key={index} onClick={(e) => handleRatingClick(e, index)}>
             <i
               className={`fa fa-star${
-                Math.abs(currentRating - maxRating) <= index
-                  ? ' selected-star'
-                  : ''
+                getStarNumber(currentRating) <= index ? ' selected-star' : ''
               }`}
             ></i>
           </li>

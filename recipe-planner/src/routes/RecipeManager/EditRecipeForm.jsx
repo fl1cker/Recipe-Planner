@@ -1,6 +1,7 @@
 import './GenericRecipeForm.css';
 import './EditRecipeForm.css';
 import RatingSystem from '../../RatingSystem';
+import { getPropertyName } from '../../helper-functions';
 
 const isBook = true;
 let ingredientCounter = 0; // set to ingredient.length
@@ -13,6 +14,11 @@ function handleAddIngredientClick() {
   console.log('adding ingredient');
 }
 
+function updateRating(topic, starRating) {
+  console.log('on topic: ', topic);
+  console.log('updating rating to: ', starRating);
+}
+
 function EditRecipeForm({ recipe }) {
   return (
     <form className="edit-form">
@@ -23,6 +29,10 @@ function EditRecipeForm({ recipe }) {
           <input className="full-width" id="title" />
         </div>
         <div className="attribute">
+          <label htmlFor="image">Upload An Image:</label>
+          <input className="full-width" id="image" type="file" />
+        </div>
+        <div className="attribute">
           <label htmlFor="prep-time">Preparation Time: (mins)</label>
           <input className="time" id="prep-time" type="number" />
         </div>
@@ -30,37 +40,65 @@ function EditRecipeForm({ recipe }) {
           <label htmlFor="comp-time">Completion Time: (mins)</label>
           <input className="time" id="comp-time" type="number" />
         </div>
-        <div className="attribute">
+        <div className="attribute rating">
           <label htmlFor="level-of-effort">Level Of Effort:</label>
-          <RatingSystem currentRating={0} maxRating={5} />
+          <div className="rating-container">
+            <RatingSystem
+              currentRating={recipe.levelOfEffort}
+              maxRating={5}
+              isEditable={true}
+              updateRating={(newRating) =>
+                updateRating(
+                  getPropertyName(recipe, (o) => o.levelOfEffort),
+                  newRating
+                )
+              }
+            />
+          </div>
         </div>
         <div className="attribute">
           <label htmlFor="taste-rating">Taste Rating:</label>
-          <RatingSystem currentRating={0} maxRating={5} />
-        </div>
-
-        <div className="attribute">
-          <label htmlFor="image">Upload An Image:</label>
-          <input className="full-width" id="image" />
+          <div className="rating-container">
+            <RatingSystem
+              currentRating={recipe.tasteRating}
+              maxRating={5}
+              isEditable={true}
+              updateRating={(newRating) =>
+                updateRating(
+                  getPropertyName(recipe, (o) => o.tasteRating),
+                  newRating
+                )
+              }
+            />
+          </div>
         </div>
       </fieldset>
-      <fieldset>
-        <label htmlFor="source">Source Radial Buttons:</label>
-        <input id="source" />
-
+      <fieldset className="recipe-source">
+        <h3 className="radio-group-label">Recipe Source:</h3>
+        <div className="radio-container">
+          <input id="book" type="radio" name="source" />
+          <label htmlFor="book">Book</label>
+          <input id="website" type="radio" name="source" />
+          <label htmlFor="website">Website</label>
+          <input id="recipe-card" type="radio" name="source" />
+          <label htmlFor="recipe-card">Recipe Card</label>
+          <input id="other" type="radio" name="source" />
+          <label htmlFor="other">Other</label>
+        </div>
         {/* if source = website, display website, else if book display book, else  . .  */}
+        <div>
+          <label htmlFor="location">{isBook ? 'Book Name:' : 'URL:'}</label>
+          <input id="location" />
 
-        <label htmlFor="location">{isBook ? 'Book Name:' : 'URL:'}</label>
-        <input id="location" />
-
-        {isBook ? (
-          <>
-            <label htmlFor="details">Page Number:</label>
-            <input id="details" />
-          </>
-        ) : (
-          ''
-        )}
+          {isBook ? (
+            <>
+              <label htmlFor="details">Page Number:</label>
+              <input id="details" />
+            </>
+          ) : (
+            ''
+          )}
+        </div>
       </fieldset>
 
       <h3>Ingredients</h3>

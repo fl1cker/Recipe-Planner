@@ -5,7 +5,7 @@ export default function TestPage() {
   return (
     <div className="container">
       <h1>Test Page</h1>
-      <RatingSystem currentRating={0} maxRating={5} isEditable={true} />
+      <p>Insert component here</p>
     </div>
   );
 }
