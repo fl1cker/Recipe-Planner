@@ -1,14 +1,14 @@
 .ratings-container {
   display: inline-block;
-  height: 2.5rem;
-  background-color: green;
   list-style: none;
-  direction: rtl;
+  padding: 0;
+  margin: 0;
 }
 
 .ratings-container li {
-  padding: 10px 5px;
+  padding: 0 1px;
   color: lightgray;
+  float: right;
 }
 
 .ratings-container i {

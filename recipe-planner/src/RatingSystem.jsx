@@ -5,12 +5,14 @@ function RatingSystem({ currentRating, maxRating }) {
 
   return (
     <ul className="ratings-container">
-      {Array.from({ length: maxRating }).map((el, index) => {
+      {Array.from({ length: maxRating }).map((_, index) => {
         return (
           <li key={index}>
             <i
               className={`fa fa-star${
-                index + 1 <= currentRating ? ' selected-star' : ''
+                Math.abs(currentRating - maxRating) <= index
+                  ? ' selected-star'
+                  : ''
               }`}
             ></i>
           </li>
