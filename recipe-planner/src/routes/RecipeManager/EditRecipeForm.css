@@ -36,11 +36,27 @@
   margin-top: 2px;
 }
 
-.edit-form input[type='file' i] {
-  background-color: #fff;
-  width: 51.3%;
+.edit-form .image-source-container {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+}
+
+.edit-form .display-image-source {
+  position: absolute;
+  top: 2px;
+  width: 33%;
+  display: inline-block;
+  padding: 1.5px 4px;
   border: 1px solid rgb(118, 118, 118);
-  border-radius: 2px;
+  border-left: none;
+  background-color: #fff;
+}
+
+.edit-form input[type='file' i] {
+  border: 1px solid rgb(118, 118, 118);
+  border-right: 2px solid rgb(118,118,118);
+  width: 16%;
 }
 
 .edit-form input[type='radio'] {

@@ -1,21 +1,38 @@
 import './GenericRecipeForm.css';
 import './EditRecipeForm.css';
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import RatingSystem from '../../RatingSystem';
-import { getPropertyName } from '../../helper-functions';
+
 import emptyRecipe from '../../models/emptyRecipe';
 
 function EditRecipeForm({ originalRecipe = emptyRecipe }) {
-  const [recipe, setRecipe] = useState(originalRecipe);
+  const [title, setTitle] = useState(originalRecipe.title);
+  const [imageSource, setImageSource] = useState(originalRecipe.imageSource);
+  const [prepTime, setPrepTime] = useState(originalRecipe.prepTime);
+  const [completionTime, setCompletionTime] = useState(
+    originalRecipe.completionTime
+  );
+  const [levelOfEffort, setLevelOfEffort] = useState(
+    originalRecipe.levelOfEffort
+  );
+  const [tasteRating, setTasteRating] = useState(originalRecipe.tasteRating);
+  const [sourceType, setSourceType] = useState(
+    originalRecipe.recipeSource.sourceType
+  );
+  const [location, setLocation] = useState(
+    originalRecipe.recipeSource.location
+  );
+  const [details, setDetails] = useState(originalRecipe.recipeSource.details);
+  const [ingredients, setIngredients] = useState(originalRecipe.ingredients);
 
   useEffect(() => {
-    const radioButton = document.getElementById(recipe.recipeSource.sourceType);
+    console.log('running effect');
+    const radioButton = document.getElementById(sourceType);
 
     if (radioButton) {
       radioButton.checked = true;
     }
-  }, []);
+  }, [sourceType]);
 
   let ingredientCounter = 0;
 
@@ -27,124 +44,91 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
     console.log('adding ingredient');
   }
 
-  function updateRating(topic, starRating) {
-    console.log('on topic: ', topic);
-    console.log('updating rating to: ', starRating);
-  }
-
   function handleRadioClick(e) {
     const selectedOption = document.querySelector(
       'input[name="source"]:checked'
     ).value;
 
-    //replace recipeType
-    const newRecipe = {
-      ...recipe,
-      recipeSource: {
-        ...recipe.recipeSource,
-        sourceType: selectedOption,
-      },
-    };
-
-    console.log(newRecipe);
-
-    setRecipe(newRecipe);
+    setSourceType(selectedOption);
   }
 
   function renderSourceSwitch() {
-    switch (recipe.recipeSource.sourceType.toLocaleLowerCase()) {
+    let sourceDescription = '';
+
+    switch (sourceType.toLocaleLowerCase()) {
       case 'book': {
-        return (
-          <>
-            <div className="attribute">
-              <label htmlFor="location">Book Name:</label>
-              <input id="location" value={recipe.recipeSource.location} />
-            </div>
-            <div className="attribute">
-              <label htmlFor="details">Page Number:</label>
-              <input id="details" value={recipe.recipeSource.details} />
-            </div>
-          </>
-        );
+        sourceDescription = 'Book Name';
+        break;
       }
       case 'website': {
-        return (
-          <>
-            <div className="attribute">
-              <label htmlFor="location">Url:</label>
-              <input id="location" value={recipe.recipeSource.location} />
-            </div>
-            <div className="attribute">
-              <label htmlFor="details">Addition Info (optional):</label>
-              <input id="details" value={recipe.recipeSource.details} />
-            </div>
-          </>
-        );
+        sourceDescription = 'Url';
+        break;
       }
       case 'recipe-card': {
-        return (
-          <>
-            <div className="attribute">
-              <label htmlFor="location">Recipe Card Location:</label>
-              <input id="location" value={recipe.recipeSource.location} />
-            </div>
-            <div className="attribute">
-              <label htmlFor="details">Addition Info (optional):</label>
-              <input id="details" value={recipe.recipeSource.details} />
-            </div>
-          </>
-        );
+        sourceDescription = 'Recipe Card Location';
+        break;
       }
       default: {
-        return (
-          <>
-            <div className="attribute">
-              <label htmlFor="location">Recipe Location:</label>
-              <input id="location" value={recipe.recipeSource.location} />
-            </div>
-            <div className="attribute">
-              <label htmlFor="details">Addition Info (optional):</label>
-              <input id="details" value={recipe.recipeSource.details} />
-            </div>
-          </>
-        );
+        sourceDescription = 'Recipe Location';
+        break;
       }
     }
+
+    return (
+      <>
+        <div className="attribute">
+          <label htmlFor="location">{sourceDescription}</label>
+          <input id="location" value={location} onChange={setLocation} />
+        </div>
+        <div className="attribute">
+          <label htmlFor="details">Page Number:</label>
+          <input id="details" value={details} onChange={setDetails} />
+        </div>
+      </>
+    );
   }
 
   return (
     <form className="edit-form">
-      <legend>Editing {recipe.title}</legend>
+      <legend>Editing {title}</legend>
       <fieldset className="standard-field">
         <div className="attribute">
           <label htmlFor="title">Title:</label>
-          <input id="title" value={recipe.title} />
+          <input id="title" value={title} onChange={setTitle} />
         </div>
         <div className="attribute">
           <label htmlFor="image">Upload An Image:</label>
-          <input id="image" type="file" value={recipe.imageSource} />
+          <div className="image-source-container">
+            <input id="image" type="file" onChange={setImageSource} />
+            <span className="display-image-source">{imageSource}</span>
+          </div>
         </div>
         <div className="attribute">
           <label htmlFor="prep-time">Preparation Time: (mins)</label>
-          <input id="prep-time" type="number" value={recipe.prepTime} />
+          <input
+            id="prep-time"
+            type="number"
+            value={prepTime}
+            onChange={setPrepTime}
+          />
         </div>
         <div className="attribute">
           <label htmlFor="comp-time">Completion Time: (mins)</label>
-          <input id="comp-time" type="number" value={recipe.completionTime} />
+          <input
+            id="comp-time"
+            type="number"
+            value={completionTime}
+            onChange={setCompletionTime}
+          />
         </div>
         <div className="attribute rating">
           <label htmlFor="level-of-effort">Level Of Effort:</label>
           <div className="rating-container">
             <RatingSystem
-              currentRating={recipe.levelOfEffort}
+              currentRating={levelOfEffort}
               maxRating={5}
               isEditable={true}
-              updateRating={(newRating) =>
-                updateRating(
-                  getPropertyName(recipe, (o) => o.levelOfEffort),
-                  newRating
-                )
-              }
+              updateRating={setLevelOfEffort}
             />
           </div>
         </div>
@@ -152,15 +136,10 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
           <label htmlFor="taste-rating">Taste Rating:</label>
           <div className="rating-container">
             <RatingSystem
-              currentRating={recipe.tasteRating}
+              currentRating={tasteRating}
               maxRating={5}
               isEditable={true}
-              updateRating={(newRating) =>
-                updateRating(
-                  getPropertyName(recipe, (o) => o.tasteRating),
-                  newRating
-                )
-              }
+              updateRating={setTasteRating}
             />
           </div>
         </div>
