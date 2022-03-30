@@ -1,8 +1,9 @@
 .ratings-container {
   display: inline-block;
   list-style: none;
-  padding: 0;
+  padding: 2px;
   margin: 0;
+  background-color: #fff;
 }
 
 .ratings-container li {

@@ -52,7 +52,7 @@ function RecipeManager() {
         {formChoice === formOptions.add ? (
           <AddRecipeForm />
         ) : (
-          <EditRecipeForm recipe={getRecipeFromId(selectedRecipeId)} />
+          <EditRecipeForm originalRecipe={getRecipeFromId(selectedRecipeId)} />
         )}
       </div>
     </>

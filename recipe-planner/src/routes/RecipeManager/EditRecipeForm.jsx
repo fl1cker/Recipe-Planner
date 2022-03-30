@@ -1,44 +1,136 @@
 import './GenericRecipeForm.css';
 import './EditRecipeForm.css';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import RatingSystem from '../../RatingSystem';
 import { getPropertyName } from '../../helper-functions';
+import emptyRecipe from '../../models/emptyRecipe';
 
-const isBook = true;
-let ingredientCounter = 0; // set to ingredient.length
+function EditRecipeForm({ originalRecipe = emptyRecipe }) {
+  const [recipe, setRecipe] = useState(originalRecipe);
 
-function handleRemoveIngredientClick(id) {
-  console.log(`removing ingredient: ${id}`);
-}
+  useEffect(() => {
+    const radioButton = document.getElementById(recipe.recipeSource.sourceType);
 
-function handleAddIngredientClick() {
-  console.log('adding ingredient');
-}
+    if (radioButton) {
+      radioButton.checked = true;
+    }
+  }, []);
 
-function updateRating(topic, starRating) {
-  console.log('on topic: ', topic);
-  console.log('updating rating to: ', starRating);
-}
+  let ingredientCounter = 0;
 
-function EditRecipeForm({ recipe }) {
+  function handleRemoveIngredientClick(id) {
+    console.log(`removing ingredient: ${id}`);
+  }
+
+  function handleAddIngredientClick() {
+    console.log('adding ingredient');
+  }
+
+  function updateRating(topic, starRating) {
+    console.log('on topic: ', topic);
+    console.log('updating rating to: ', starRating);
+  }
+
+  function handleRadioClick(e) {
+    const selectedOption = document.querySelector(
+      'input[name="source"]:checked'
+    ).value;
+
+    //replace recipeType
+    const newRecipe = {
+      ...recipe,
+      recipeSource: {
+        ...recipe.recipeSource,
+        sourceType: selectedOption,
+      },
+    };
+
+    console.log(newRecipe);
+
+    setRecipe(newRecipe);
+  }
+
+  function renderSourceSwitch() {
+    switch (recipe.recipeSource.sourceType.toLocaleLowerCase()) {
+      case 'book': {
+        return (
+          <>
+            <div className="attribute">
+              <label htmlFor="location">Book Name:</label>
+              <input id="location" value={recipe.recipeSource.location} />
+            </div>
+            <div className="attribute">
+              <label htmlFor="details">Page Number:</label>
+              <input id="details" value={recipe.recipeSource.details} />
+            </div>
+          </>
+        );
+      }
+      case 'website': {
+        return (
+          <>
+            <div className="attribute">
+              <label htmlFor="location">Url:</label>
+              <input id="location" value={recipe.recipeSource.location} />
+            </div>
+            <div className="attribute">
+              <label htmlFor="details">Addition Info (optional):</label>
+              <input id="details" value={recipe.recipeSource.details} />
+            </div>
+          </>
+        );
+      }
+      case 'recipe-card': {
+        return (
+          <>
+            <div className="attribute">
+              <label htmlFor="location">Recipe Card Location:</label>
+              <input id="location" value={recipe.recipeSource.location} />
+            </div>
+            <div className="attribute">
+              <label htmlFor="details">Addition Info (optional):</label>
+              <input id="details" value={recipe.recipeSource.details} />
+            </div>
+          </>
+        );
+      }
+      default: {
+        return (
+          <>
+            <div className="attribute">
+              <label htmlFor="location">Recipe Location:</label>
+              <input id="location" value={recipe.recipeSource.location} />
+            </div>
+            <div className="attribute">
+              <label htmlFor="details">Addition Info (optional):</label>
+              <input id="details" value={recipe.recipeSource.details} />
+            </div>
+          </>
+        );
+      }
+    }
+  }
+
   return (
     <form className="edit-form">
       <legend>Editing {recipe.title}</legend>
       <fieldset className="standard-field">
         <div className="attribute">
           <label htmlFor="title">Title:</label>
-          <input className="full-width" id="title" />
+          <input id="title" value={recipe.title} />
         </div>
         <div className="attribute">
           <label htmlFor="image">Upload An Image:</label>
-          <input className="full-width" id="image" type="file" />
+          <input id="image" type="file" value={recipe.imageSource} />
         </div>
         <div className="attribute">
           <label htmlFor="prep-time">Preparation Time: (mins)</label>
-          <input className="time" id="prep-time" type="number" />
+          <input id="prep-time" type="number" value={recipe.prepTime} />
         </div>
         <div className="attribute">
           <label htmlFor="comp-time">Completion Time: (mins)</label>
-          <input className="time" id="comp-time" type="number" />
+          <input id="comp-time" type="number" value={recipe.completionTime} />
         </div>
         <div className="attribute rating">
           <label htmlFor="level-of-effort">Level Of Effort:</label>
@@ -76,29 +168,41 @@ function EditRecipeForm({ recipe }) {
       <fieldset className="recipe-source">
         <h3 className="radio-group-label">Recipe Source:</h3>
         <div className="radio-container">
-          <input id="book" type="radio" name="source" />
+          <input
+            id="book"
+            value="book"
+            type="radio"
+            name="source"
+            onClick={handleRadioClick}
+          />
           <label htmlFor="book">Book</label>
-          <input id="website" type="radio" name="source" />
+          <input
+            id="website"
+            value="website"
+            type="radio"
+            name="source"
+            onClick={handleRadioClick}
+          />
           <label htmlFor="website">Website</label>
-          <input id="recipe-card" type="radio" name="source" />
+          <input
+            id="recipe-card"
+            value="recipe-card"
+            type="radio"
+            name="source"
+            onClick={handleRadioClick}
+          />
           <label htmlFor="recipe-card">Recipe Card</label>
-          <input id="other" type="radio" name="source" />
+          <input
+            id="other"
+            value="other"
+            type="radio"
+            name="source"
+            onClick={handleRadioClick}
+          />
+
           <label htmlFor="other">Other</label>
         </div>
-        {/* if source = website, display website, else if book display book, else  . .  */}
-        <div>
-          <label htmlFor="location">{isBook ? 'Book Name:' : 'URL:'}</label>
-          <input id="location" />
-
-          {isBook ? (
-            <>
-              <label htmlFor="details">Page Number:</label>
-              <input id="details" />
-            </>
-          ) : (
-            ''
-          )}
-        </div>
+        <div className="source-details">{renderSourceSwitch()}</div>
       </fieldset>
 
       <h3>Ingredients</h3>
