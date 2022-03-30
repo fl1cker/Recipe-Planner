@@ -52,24 +52,38 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
     setSourceType(selectedOption);
   }
 
+  function handleIngredientChange(propertyName, index, event) {
+    ingredients.map((ingredient, i) => {
+      return index === i
+        ? { ...ingredient, [propertyName]: event.target.value }
+        : ingredient;
+    });
+    setIngredients(ingredients);
+  }
+
   function renderSourceSwitch() {
     let sourceDescription = '';
+    let secondaryDescription = '';
 
-    switch (sourceType.toLocaleLowerCase()) {
+    switch (sourceType) {
       case 'book': {
         sourceDescription = 'Book Name';
+        secondaryDescription = 'Page Number';
         break;
       }
       case 'website': {
         sourceDescription = 'Url';
+        secondaryDescription = 'Additional Info (optional)';
         break;
       }
       case 'recipe-card': {
         sourceDescription = 'Recipe Card Location';
+        secondaryDescription = 'Additional Info (optional)';
         break;
       }
       default: {
         sourceDescription = 'Recipe Location';
+        secondaryDescription = 'Additional Info (optional)';
         break;
       }
     }
@@ -78,11 +92,19 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
       <>
         <div className="attribute">
           <label htmlFor="location">{sourceDescription}</label>
-          <input id="location" value={location} onChange={setLocation} />
+          <input
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
         </div>
         <div className="attribute">
-          <label htmlFor="details">Page Number:</label>
-          <input id="details" value={details} onChange={setDetails} />
+          <label htmlFor="details">{secondaryDescription}</label>
+          <input
+            id="details"
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+          />
         </div>
       </>
     );
@@ -90,16 +112,24 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
 
   return (
     <form className="edit-form">
-      <legend>Editing {title}</legend>
+      <legend>{`Editing ${title}`}</legend>
       <fieldset className="standard-field">
         <div className="attribute">
           <label htmlFor="title">Title:</label>
-          <input id="title" value={title} onChange={setTitle} />
+          <input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div className="attribute">
           <label htmlFor="image">Upload An Image:</label>
           <div className="image-source-container">
-            <input id="image" type="file" onChange={setImageSource} />
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => setImageSource(e.target.value)}
+            />
             <span className="display-image-source">{imageSource}</span>
           </div>
         </div>
@@ -109,7 +139,7 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
             id="prep-time"
             type="number"
             value={prepTime}
-            onChange={setPrepTime}
+            onChange={(e) => setPrepTime(e.target.value)}
           />
         </div>
         <div className="attribute">
@@ -118,7 +148,7 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
             id="comp-time"
             type="number"
             value={completionTime}
-            onChange={setCompletionTime}
+            onChange={(e) => setCompletionTime(e.target.value)}
           />
         </div>
         <div className="attribute rating">
@@ -186,24 +216,45 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
 
       <h3>Ingredients</h3>
       <fieldset className="ingredient">
-        <label htmlFor={`ingredient-name${++ingredientCounter}`}>Name:</label>
-        <input id={`ingredient-name${ingredientCounter}`} />
+        {ingredients.map((ingredient, index) => {
+          return (
+            <div className="ingredient-container" key={ingredient.name}>
+              <label htmlFor={`ingredient-name${++ingredientCounter}`}>
+                Name:
+              </label>
+              <input
+                id={`ingredient-name${ingredientCounter}`}
+                value={ingredient.name}
+                onChange={(e) => handleIngredientChange('name', index, e)}
+              />
 
-        <label htmlFor={`ingredient-amount${++ingredientCounter}`}>
-          Amount:
-        </label>
-        <input id={`ingredient-amount${ingredientCounter}`} />
+              <label htmlFor={`ingredient-amount${ingredientCounter}`}>
+                Amount:
+              </label>
+              <input
+                id={`ingredient-amount${ingredientCounter}`}
+                value={ingredient.amount}
+                onChange={(e) => handleIngredientChange('amount', index, e)}
+              />
 
-        <label htmlFor={`ingredient-measurement${++ingredientCounter}`}>
-          Unit Of Measure:
-        </label>
-        <input id={`ingredient-measurement${ingredientCounter}`} />
+              <label htmlFor={`ingredient-measurement${ingredientCounter}`}>
+                Unit Of Measure:
+              </label>
+              <select
+                id={`ingredient-measurement${ingredientCounter}`}
+                onChange={(e) => handleIngredientChange('unit', index, e)}
+              >
+                <option value="">Default</option>
+              </select>
+            </div>
+          );
+        })}
+        <i
+          className="fa fa-minus"
+          onClick={() => handleRemoveIngredientClick(ingredientCounter)}
+        ></i>
+        <i className="fa fa-plus" onClick={handleAddIngredientClick}></i>
       </fieldset>
-      <i
-        className="fa fa-minus"
-        onClick={() => handleRemoveIngredientClick(ingredientCounter)}
-      ></i>
-      <i className="fa fa-plus" onClick={handleAddIngredientClick}></i>
     </form>
   );
 }

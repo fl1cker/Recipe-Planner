@@ -55,7 +55,7 @@
 
 .edit-form input[type='file' i] {
   border: 1px solid rgb(118, 118, 118);
-  border-right: 2px solid rgb(118,118,118);
+  border-right: 2px solid rgb(118, 118, 118);
   width: 16%;
 }
 
@@ -68,7 +68,6 @@
 
 .edit-form .recipe-source {
   display: inline-block;
-  margin-top: 10px;
 }
 
 .edit-form .rating-container {
