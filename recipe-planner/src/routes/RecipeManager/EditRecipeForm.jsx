@@ -215,37 +215,41 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
       </fieldset>
 
       <h3>Ingredients</h3>
-      <fieldset className="ingredient">
+      <fieldset className="ingredients">
         {ingredients.map((ingredient, index) => {
           return (
             <div className="ingredient-container" key={ingredient.name}>
-              <label htmlFor={`ingredient-name${++ingredientCounter}`}>
-                Name:
-              </label>
-              <input
-                id={`ingredient-name${ingredientCounter}`}
-                value={ingredient.name}
-                onChange={(e) => handleIngredientChange('name', index, e)}
-              />
-
-              <label htmlFor={`ingredient-amount${ingredientCounter}`}>
-                Amount:
-              </label>
-              <input
-                id={`ingredient-amount${ingredientCounter}`}
-                value={ingredient.amount}
-                onChange={(e) => handleIngredientChange('amount', index, e)}
-              />
-
-              <label htmlFor={`ingredient-measurement${ingredientCounter}`}>
-                Unit Of Measure:
-              </label>
-              <select
-                id={`ingredient-measurement${ingredientCounter}`}
-                onChange={(e) => handleIngredientChange('unit', index, e)}
-              >
-                <option value="">Default</option>
-              </select>
+              <div className="ingredient-name">
+                <label htmlFor={`ingredient-name${++ingredientCounter}`}>
+                  Name:
+                </label>
+                <input
+                  id={`ingredient-name${ingredientCounter}`}
+                  value={ingredient.name}
+                  onChange={(e) => handleIngredientChange('name', index, e)}
+                />
+              </div>
+              <div className="ingredient-amount">
+                <label htmlFor={`ingredient-amount${ingredientCounter}`}>
+                  Amount:
+                </label>
+                <input
+                  id={`ingredient-amount${ingredientCounter}`}
+                  value={ingredient.amount}
+                  onChange={(e) => handleIngredientChange('amount', index, e)}
+                />
+              </div>
+              <div className="ingredient-unit">
+                <label htmlFor={`ingredient-unit${ingredientCounter}`}>
+                  Unit Of Measure:
+                </label>
+                <select
+                  id={`ingredient-unit${ingredientCounter}`}
+                  onChange={(e) => handleIngredientChange('unit', index, e)}
+                >
+                  <option value="">Default</option>
+                </select>
+              </div>
             </div>
           );
         })}

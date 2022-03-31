@@ -31,7 +31,6 @@
 
 .edit-form input {
   width: 50%;
-  height: 100%;
   margin: 0;
   margin-top: 2px;
 }
@@ -85,4 +84,16 @@
 
 .edit-form .radio-group-label {
   margin: 0 0 5px 0;
+}
+
+.edit-form .ingredient-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-auto-rows: max-content;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+.edit-form .ingredient-container label {
+  display: block;
 }
