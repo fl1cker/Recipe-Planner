@@ -250,6 +250,9 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
                   <option value="">Default</option>
                 </select>
               </div>
+              <div className="ingredient-delete">
+                <i className="fa fa-trash"></i>
+              </div>
             </div>
           );
         })}
