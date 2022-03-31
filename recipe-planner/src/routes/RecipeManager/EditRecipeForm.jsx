@@ -26,7 +26,6 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
   const [ingredients, setIngredients] = useState(originalRecipe.ingredients);
 
   useEffect(() => {
-    console.log('running effect');
     const radioButton = document.getElementById(sourceType);
 
     if (radioButton) {
@@ -36,12 +35,26 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
 
   let ingredientCounter = 0;
 
-  function handleRemoveIngredientClick(id) {
-    console.log(`removing ingredient: ${id}`);
-  }
-
   function handleAddIngredientClick() {
-    console.log('adding ingredient');
+    let maxId = 99999;
+
+    if (ingredients.length) {
+      maxId = ingredients.reduce(
+        (max, ingredient) => (ingredient.id > max ? ingredient.id : max),
+        ingredients[0].id
+      );
+    }
+
+    const newIngredient = {
+      id: ++maxId,
+      name: '',
+      amount: 0,
+      unit: 'unit',
+    };
+
+    ingredients.push(newIngredient);
+
+    setIngredients([...ingredients]);
   }
 
   function handleRadioClick(e) {
@@ -52,13 +65,21 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
     setSourceType(selectedOption);
   }
 
-  function handleIngredientChange(propertyName, index, event) {
-    ingredients.map((ingredient, i) => {
-      return index === i
+  function handleIngredientChange(propertyName, id, event) {
+    const newIngredients = ingredients.map((ingredient) => {
+      return id == ingredient.id
         ? { ...ingredient, [propertyName]: event.target.value }
         : ingredient;
     });
-    setIngredients(ingredients);
+    setIngredients([...newIngredients]);
+  }
+
+  function handleDeleteIngredientClick(id) {
+    const newIngredients = ingredients.filter(
+      (ingredient) => ingredient.id !== id
+    );
+
+    setIngredients(newIngredients);
   }
 
   function renderSourceSwitch() {
@@ -216,9 +237,9 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
 
       <h3>Ingredients</h3>
       <fieldset className="ingredients">
-        {ingredients.map((ingredient, index) => {
+        {ingredients.map((ingredient) => {
           return (
-            <div className="ingredient-container" key={ingredient.name}>
+            <div className="ingredient-container" key={ingredient.id}>
               <div className="ingredient-name">
                 <label htmlFor={`ingredient-name${++ingredientCounter}`}>
                   Name:
@@ -226,7 +247,9 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
                 <input
                   id={`ingredient-name${ingredientCounter}`}
                   value={ingredient.name}
-                  onChange={(e) => handleIngredientChange('name', index, e)}
+                  onChange={(e) =>
+                    handleIngredientChange('name', ingredient.id, e)
+                  }
                 />
               </div>
               <div className="ingredient-amount">
@@ -236,7 +259,9 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
                 <input
                   id={`ingredient-amount${ingredientCounter}`}
                   value={ingredient.amount}
-                  onChange={(e) => handleIngredientChange('amount', index, e)}
+                  onChange={(e) =>
+                    handleIngredientChange('amount', ingredient.id, e)
+                  }
                 />
               </div>
               <div className="ingredient-unit">
@@ -245,22 +270,26 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
                 </label>
                 <select
                   id={`ingredient-unit${ingredientCounter}`}
-                  onChange={(e) => handleIngredientChange('unit', index, e)}
+                  onChange={(e) =>
+                    handleIngredientChange('unit', ingredient.id, e)
+                  }
                 >
                   <option value="">Default</option>
                 </select>
               </div>
               <div className="ingredient-delete">
-                <i className="fa fa-trash"></i>
+                <i
+                  className="fa fa-trash"
+                  onClick={() => handleDeleteIngredientClick(ingredient.id)}
+                ></i>
               </div>
             </div>
           );
         })}
         <i
-          className="fa fa-minus"
-          onClick={() => handleRemoveIngredientClick(ingredientCounter)}
+          className="fa fa-plus ingredient-add"
+          onClick={() => handleAddIngredientClick()}
         ></i>
-        <i className="fa fa-plus" onClick={handleAddIngredientClick}></i>
       </fieldset>
     </form>
   );

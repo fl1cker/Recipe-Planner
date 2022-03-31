@@ -14,11 +14,13 @@ export const SampleData = [
     },
     ingredients: [
       {
+        id: 0,
         name: 'Vegetable Oil',
         amount: 4,
         unit: 'fl-oz',
       },
       {
+        id: 1,
         name: 'Cookie Dough',
         amount: 2,
         unit: 'oz',
@@ -40,26 +42,31 @@ export const SampleData = [
     },
     ingredients: [
       {
+        id: 2,
         name: 'Vegetable Broth',
         amount: 4,
         unit: 'cup',
       },
       {
-        name: 'Carrots',
+        id: 3,
+        name: 'Carrot',
         amount: 2,
         unit: 'unit',
       },
       {
+        id: 4,
         name: 'Broccoli',
         amount: 2,
         unit: 'unit',
       },
       {
-        name: 'Mushrooms',
+        id: 5,
+        name: 'Mushroom',
         amount: 2,
         unit: 'cup',
       },
       {
+        id: 6,
         name: 'Egg',
         amount: 2,
         unit: 'unit',
