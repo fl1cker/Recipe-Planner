@@ -4,6 +4,7 @@ import { SampleData } from '../../temp/sample-data';
 import { useState } from 'react';
 import EmptyCardContents from './EmptyCardContents';
 import SummaryPanel from './SummaryPanel';
+import DragAndDrop from '../../DragAndDrop';
 import { DaysOfWeek } from '../../models/DaysOfWeek';
 
 function RecipeWeek() {
@@ -17,9 +18,9 @@ function RecipeWeek() {
   }
 
   function handleClearDayClick(index) {
-    cardData[index] = null;
-
     const newData = [...cardData];
+    newData[index] = null;
+
     setCardData(newData);
   }
 
@@ -34,6 +35,27 @@ function RecipeWeek() {
   function handleSubmit() {
     console.log('submitting');
     handleClosePanel();
+  }
+
+  function handleDragStart(event, startIndex) {
+    event.dataTransfer.setData('startIndex', startIndex);
+  }
+
+  function handleDrop(event, dropIndex) {
+    const startIndex = event.dataTransfer.getData('startIndex');
+
+    const newArray = swapElements(startIndex, dropIndex);
+
+    setCardData(newArray);
+  }
+
+  function swapElements(startIndex, dropIndex) {
+    const newArray = [...cardData];
+    const placeHolder = newArray[startIndex];
+    newArray[startIndex] = newArray[dropIndex];
+    newArray[dropIndex] = placeHolder;
+
+    return newArray;
   }
 
   return (
@@ -54,17 +76,23 @@ function RecipeWeek() {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
-              {cardData[index] ? (
-                <Card
-                  cardData={cardData[index]}
-                  refreshDay={() => handleRefreshDayClick(index)}
-                  clearDay={() => handleClearDayClick(index)}
-                />
-              ) : (
-                <EmptyCardContents
-                  refreshDay={() => handleRefreshDayClick(index)}
-                />
-              )}
+              <DragAndDrop
+                key={day}
+                dragStart={(e) => handleDragStart(e, index)}
+                drop={(e) => handleDrop(e, index)}
+              >
+                {cardData[index] ? (
+                  <Card
+                    cardData={cardData[index]}
+                    refreshDay={() => handleRefreshDayClick(index)}
+                    clearDay={() => handleClearDayClick(index)}
+                  />
+                ) : (
+                  <EmptyCardContents
+                    refreshDay={() => handleRefreshDayClick(index)}
+                  />
+                )}
+              </DragAndDrop>
             </div>
           );
         })}

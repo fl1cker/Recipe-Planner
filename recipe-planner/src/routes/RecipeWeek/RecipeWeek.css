@@ -71,3 +71,8 @@
 .summary-panel.show {
   transform: translateX(-45vw);
 }
+
+.card-holder {
+  height: 100%;
+  width: 100%;
+}

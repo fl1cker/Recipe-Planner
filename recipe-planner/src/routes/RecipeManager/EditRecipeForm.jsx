@@ -36,7 +36,7 @@ function EditRecipeForm({ originalRecipe = emptyRecipe }) {
   let ingredientCounter = 0;
 
   function handleAddIngredientClick() {
-    let maxId = 99999;
+    let maxId = 99999; // this will have to change.  We are only grabbing the maxId of the ingredients in this recipe, not all recipes.  this will solve itself when this is performed at the DB level
 
     if (ingredients.length) {
       maxId = ingredients.reduce(
