@@ -1,6 +1,16 @@
-function DragAndDrop({ children, dragStart, drop }) {
+function DragAndDrop({ children, index, swapMethod }) {
   function allowDrop(ev) {
     ev.preventDefault();
+  }
+
+  function dragStart(event) {
+    event.dataTransfer.setData('startIndex', index);
+  }
+
+  function drop(event) {
+    const startIndex = event.dataTransfer.getData('startIndex');
+
+    swapMethod(startIndex, index);
   }
 
   return (

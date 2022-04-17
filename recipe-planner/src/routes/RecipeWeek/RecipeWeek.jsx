@@ -37,25 +37,13 @@ function RecipeWeek() {
     handleClosePanel();
   }
 
-  function handleDragStart(event, startIndex) {
-    event.dataTransfer.setData('startIndex', startIndex);
-  }
-
-  function handleDrop(event, dropIndex) {
-    const startIndex = event.dataTransfer.getData('startIndex');
-
-    const newArray = swapElements(startIndex, dropIndex);
-
-    setCardData(newArray);
-  }
-
-  function swapElements(startIndex, dropIndex) {
+  function swapCards(startIndex, dropIndex) {
     const newArray = [...cardData];
     const placeHolder = newArray[startIndex];
     newArray[startIndex] = newArray[dropIndex];
     newArray[dropIndex] = placeHolder;
 
-    return newArray;
+    setCardData(newArray);
   }
 
   return (
@@ -78,8 +66,8 @@ function RecipeWeek() {
               <div className="day">{day}</div>
               <DragAndDrop
                 key={day}
-                dragStart={(e) => handleDragStart(e, index)}
-                drop={(e) => handleDrop(e, index)}
+                index={index}
+                swapMethod={(x, y) => swapCards(x, y)}
               >
                 {cardData[index] ? (
                   <Card
