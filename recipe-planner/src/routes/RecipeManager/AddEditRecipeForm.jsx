@@ -135,7 +135,7 @@ function AddEditRecipeForm({
     <form className="recipe-form">
       <div className="legend-wrapper">
         <legend>
-          {`${addOrEdit === AddOrEdit.Edit ? 'Editing' : 'Adding'} ${title}`}
+          {`${addOrEdit === AddOrEdit.Edit ? 'Editing:' : 'Adding:'} ${title}`}
         </legend>
         <button
           type="button"
@@ -251,8 +251,8 @@ function AddEditRecipeForm({
         <div className="source-details">{renderSourceSwitch()}</div>
       </fieldset>
 
-      <h3>Ingredients</h3>
-      <fieldset className="ingredients">
+      <fieldset>
+        <h3>Ingredients</h3>
         {ingredients.map((ingredient) => {
           return (
             <div className="ingredient-container" key={ingredient.id}>
@@ -307,6 +307,15 @@ function AddEditRecipeForm({
           onClick={() => handleAddIngredientClick()}
         ></i>
       </fieldset>
+      <div className="bottom-buttons">
+        <button type="button" className="delete-button">
+          Delete
+        </button>
+
+        <button type="button" className="save-button">
+          Save
+        </button>
+      </div>
     </form>
   );
 }

@@ -7,7 +7,7 @@
 
 .recipe-form .legend-wrapper {
   max-width: 450px;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 10px;
   position: relative;
@@ -131,4 +131,31 @@
 .recipe-form i.ingredient-add {
   cursor: pointer;
   font-size: 1.5rem;
+}
+
+.recipe-form .bottom-buttons {
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.recipe-form .bottom-buttons button {
+  flex-basis: 1;
+  min-width: 15%;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.recipe-form .bottom-buttons .save-button {
+  background-image: var(--primary-button-gradient);
+  border-color: var(--primary-font-color);
+}
+
+.recipe-form .bottom-buttons .delete-button {
+  background-image: var(--delete-button-gradient);
+  border-color: darkred;
 }
