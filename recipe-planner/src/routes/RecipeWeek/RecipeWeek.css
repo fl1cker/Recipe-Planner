@@ -66,6 +66,7 @@
   -webkit-clip-path: ellipse(67% 75% at 50% 50%);
   clip-path: ellipse(70% 71%);
   box-sizing: border-box;
+  z-index: 5;
 }
 
 .summary-panel.show {
