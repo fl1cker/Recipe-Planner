@@ -1,18 +1,16 @@
 import './RecipeManager.css';
-import { useState } from 'react';
-import AddRecipeForm from './AddRecipeForm';
-import EditRecipeForm from './EditRecipeForm';
+import React, { useState } from 'react';
 import { SampleData } from '../../temp/sample-data';
-
-const formOptions = {
-  add: 'add',
-  edit: 'edit',
-};
+import AddOrEdit from '../../models/AddOrEdit';
+import emptyRecipe from '../../models/emptyRecipe';
+import AddEditRecipeForm from './AddEditRecipeForm';
 
 function RecipeManager() {
-  const [formChoice, setFormChoice] = useState(formOptions.add);
-  const [selectedRecipeId, setSelectedRecipeId] = useState(-1);
+  const [addOrEdit, setAddOrEdit] = useState(AddOrEdit.Add);
+  const [selectedRecipe, setSelectedRecipe] = useState(emptyRecipe);
   const [recipes, setRecipes] = useState(SampleData);
+
+  const resetRecipeForm = React.useRef(null);
 
   function getRecipeFromId(id) {
     const recipe = recipes.find((x) => x.id == id);
@@ -21,14 +19,22 @@ function RecipeManager() {
   }
 
   function handleAddRecipeClicked() {
-    setFormChoice(formOptions.add);
+    resetRecipeForm.current();
+
+    const recipeSelect = document.querySelector('#select-recipe');
+    recipeSelect.value = '';
+
+    handleRecipeSelected(emptyRecipe.id);
+    setAddOrEdit(AddOrEdit.Add);
   }
 
-  function handleRecipeSelected(e) {
-    const selectedId = e.target.value;
-    setSelectedRecipeId(selectedId);
+  function handleRecipeSelected(newId) {
+    console.log('changing with ', newId);
 
-    setFormChoice(formOptions.edit);
+    const newSelectedRecipe = getRecipeFromId(newId);
+
+    setSelectedRecipe(newSelectedRecipe);
+    setAddOrEdit(AddOrEdit.Edit);
   }
 
   return (
@@ -40,7 +46,10 @@ function RecipeManager() {
       </button>
       &nbsp;OR&nbsp;
       <label htmlFor="select-recipe">Choose an Existing Recipe:</label>
-      <select id="select-recipe" onChange={handleRecipeSelected}>
+      <select
+        id="select-recipe"
+        onChange={(e) => handleRecipeSelected(e.target.value)}
+      >
         <option value=""></option>
         {recipes.map((recipe) => (
           <option key={recipe.id} value={recipe.id}>
@@ -48,13 +57,12 @@ function RecipeManager() {
           </option>
         ))}
       </select>
-      <div className="recipe-form">
-        {formChoice === formOptions.add ? (
-          <AddRecipeForm />
-        ) : (
-          <EditRecipeForm recipe={getRecipeFromId(selectedRecipeId)} />
-        )}
-      </div>
+      <AddEditRecipeForm
+        key={`recipe-${addOrEdit}`}
+        recipe={selectedRecipe}
+        resetRecipeForm={resetRecipeForm}
+        addOrEdit={addOrEdit}
+      />
     </>
   );
 }

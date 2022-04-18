@@ -1,22 +1,23 @@
 .ratings-container {
   display: inline-block;
-  height: 2.5rem;
-  background-color: green;
   list-style: none;
-  direction: rtl;
+  padding: 2px;
+  margin: 0;
+  background-color: #fff;
 }
 
 .ratings-container li {
-  padding: 10px 5px;
+  padding: 0 1px;
   color: lightgray;
+  float: right;
 }
 
 .ratings-container i {
   font-size: 1rem;
 }
 
-.ratings-container li:hover,
-.ratings-container li:hover ~ li {
+.ratings-container.editable li:hover,
+.ratings-container.editable li:hover ~ li {
   color: gold;
 }
 

@@ -9,10 +9,12 @@
 
 .card-wrapper.selected .card-front {
   transform: rotateY(180deg);
+  z-index: 1;
 }
 
 .card-wrapper.selected .card-back {
   transform: rotateY(0deg);
+  z-index: 2;
 }
 
 .card-front,
@@ -34,6 +36,11 @@
   padding: 5px;
 }
 
+.card-front.skip-animation,
+.card-back.skip-animation {
+  transition: none;
+}
+
 .card-front {
   position: absolute;
   top: 0;
@@ -45,6 +52,7 @@
   border-radius: 5px 5px 2px 2px;
   backface-visibility: hidden;
   transform: rotate3d(0, 0, 0, 0);
+  z-index: 2;
 }
 
 .card-back {
@@ -58,6 +66,7 @@
   backface-visibility: hidden;
   transform: rotate3d(0, 1, 0, 180deg);
   transform-style: preserve-3d;
+  z-index: 1;
 }
 
 .figure {

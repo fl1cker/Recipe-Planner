@@ -10,3 +10,11 @@ export function sortByName(a, b) {
   }
   return 0;
 }
+
+export function getPropertyName(obj, expression) {
+  const res = {};
+  Object.keys(obj).map((k) => {
+    res[k] = () => k;
+  });
+  return expression(res)();
+}

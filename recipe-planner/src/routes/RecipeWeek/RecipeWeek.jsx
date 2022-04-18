@@ -4,6 +4,7 @@ import { SampleData } from '../../temp/sample-data';
 import { useState } from 'react';
 import EmptyCardContents from './EmptyCardContents';
 import SummaryPanel from './SummaryPanel';
+import DragAndDrop from '../../DragAndDrop';
 import { DaysOfWeek } from '../../models/DaysOfWeek';
 
 function RecipeWeek() {
@@ -17,9 +18,9 @@ function RecipeWeek() {
   }
 
   function handleClearDayClick(index) {
-    cardData[index] = null;
-
     const newData = [...cardData];
+    newData[index] = null;
+
     setCardData(newData);
   }
 
@@ -34,6 +35,42 @@ function RecipeWeek() {
   function handleSubmit() {
     console.log('submitting');
     handleClosePanel();
+  }
+
+  function swapCards(startIndex, dropIndex) {
+    const startNode = document.querySelectorAll('.card-wrapper')[startIndex];
+    const dropNode = document.querySelectorAll('.card-wrapper')[dropIndex];
+
+    const flippedOpposite =
+      startNode.classList.contains('selected') !=
+      dropNode.classList.contains('selected');
+
+    const cardList = [
+      ...startNode.querySelectorAll('.card-front, .card-back'),
+      ...dropNode.querySelectorAll('.card-front, .card-back'),
+    ];
+
+    if (flippedOpposite) {
+      startNode.classList.toggle('selected');
+      dropNode.classList.toggle('selected');
+
+      cardList.forEach((node) => {
+        node.classList.add('skip-animation');
+      });
+    }
+
+    const newArray = [...cardData];
+    const placeHolder = newArray[startIndex];
+    newArray[startIndex] = newArray[dropIndex];
+    newArray[dropIndex] = placeHolder;
+
+    setCardData(newArray);
+
+    cardList.forEach((node) => {
+      setTimeout(() => {
+        node.classList.remove('skip-animation');
+      }, 1);
+    });
   }
 
   return (
@@ -54,17 +91,23 @@ function RecipeWeek() {
           return (
             <div className="day-card" key={day}>
               <div className="day">{day}</div>
-              {cardData[index] ? (
-                <Card
-                  cardData={cardData[index]}
-                  refreshDay={() => handleRefreshDayClick(index)}
-                  clearDay={() => handleClearDayClick(index)}
-                />
-              ) : (
-                <EmptyCardContents
-                  refreshDay={() => handleRefreshDayClick(index)}
-                />
-              )}
+              <DragAndDrop
+                key={day}
+                index={index}
+                swapMethod={(x, y) => swapCards(x, y)}
+              >
+                {cardData[index] ? (
+                  <Card
+                    cardData={cardData[index]}
+                    refreshDay={() => handleRefreshDayClick(index)}
+                    clearDay={() => handleClearDayClick(index)}
+                  />
+                ) : (
+                  <EmptyCardContents
+                    refreshDay={() => handleRefreshDayClick(index)}
+                  />
+                )}
+              </DragAndDrop>
             </div>
           );
         })}
