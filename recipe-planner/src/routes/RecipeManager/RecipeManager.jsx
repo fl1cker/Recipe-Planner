@@ -1,10 +1,9 @@
 import './RecipeManager.css';
 import React, { useState } from 'react';
-import AddRecipeForm from './AddRecipeForm';
-import EditRecipeForm from './EditRecipeForm';
 import { SampleData } from '../../temp/sample-data';
 import AddOrEdit from '../../models/AddOrEdit';
 import emptyRecipe from '../../models/emptyRecipe';
+import AddEditRecipeForm from './AddEditRecipeForm';
 
 function RecipeManager() {
   const [addOrEdit, setAddOrEdit] = useState(AddOrEdit.Add);
@@ -22,15 +21,17 @@ function RecipeManager() {
   function handleAddRecipeClicked() {
     resetRecipeForm.current();
 
-    setAddOrEdit(AddOrEdit.Add);
-
     const recipeSelect = document.querySelector('#select-recipe');
     recipeSelect.value = '';
+
+    handleRecipeSelected(emptyRecipe.id);
+    setAddOrEdit(AddOrEdit.Add);
   }
 
-  function handleRecipeSelected(e) {
-    const selectedId = e.target.value;
-    const newSelectedRecipe = getRecipeFromId(selectedId);
+  function handleRecipeSelected(newId) {
+    console.log('changing with ', newId);
+
+    const newSelectedRecipe = getRecipeFromId(newId);
 
     setSelectedRecipe(newSelectedRecipe);
     setAddOrEdit(AddOrEdit.Edit);
@@ -45,7 +46,10 @@ function RecipeManager() {
       </button>
       &nbsp;OR&nbsp;
       <label htmlFor="select-recipe">Choose an Existing Recipe:</label>
-      <select id="select-recipe" onChange={handleRecipeSelected}>
+      <select
+        id="select-recipe"
+        onChange={(e) => handleRecipeSelected(e.target.value)}
+      >
         <option value=""></option>
         {recipes.map((recipe) => (
           <option key={recipe.id} value={recipe.id}>
@@ -53,15 +57,12 @@ function RecipeManager() {
           </option>
         ))}
       </select>
-      {addOrEdit === AddOrEdit.Add ? (
-        <AddRecipeForm resetRecipeForm={resetRecipeForm} />
-      ) : (
-        <EditRecipeForm
-          key={`edit-recipe-form-${selectedRecipe.id}`}
-          resetRecipeForm={resetRecipeForm}
-          originalRecipe={selectedRecipe}
-        />
-      )}
+      <AddEditRecipeForm
+        key={`recipe-${addOrEdit}`}
+        recipe={selectedRecipe}
+        resetRecipeForm={resetRecipeForm}
+        addOrEdit={addOrEdit}
+      />
     </>
   );
 }

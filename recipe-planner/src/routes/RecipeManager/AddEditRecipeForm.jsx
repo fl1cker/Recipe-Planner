@@ -1,5 +1,4 @@
 import './GenericRecipeForm.css';
-import './EditRecipeForm.css';
 import React, { useEffect } from 'react';
 import RatingSystem from '../../RatingSystem';
 import useAddEditRecipeFormState from './AddEditRecipeFormState';
@@ -135,7 +134,9 @@ function AddEditRecipeForm({
     <form className="recipe-form">
       <div className="legend-wrapper">
         <legend>
-          {`${addOrEdit === AddOrEdit.Edit ? 'Editing:' : 'Adding:'} ${title}`}
+          {`${addOrEdit === AddOrEdit.Edit ? 'Editing:' : 'Adding:'} ${
+            title ? title : '<new recipe>'
+          }`}
         </legend>
         <button
           type="button"
