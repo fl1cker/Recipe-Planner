@@ -7,7 +7,7 @@ const emptyRecipe = {
   levelOfEffort: 0,
   tasteRating: 0,
   recipeSource: {
-    sourceType: '',
+    sourceType: 'book',
     location: '',
     details: '',
   },

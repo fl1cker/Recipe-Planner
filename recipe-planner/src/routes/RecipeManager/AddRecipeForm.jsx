@@ -1,8 +1,16 @@
 import './GenericRecipeForm.css';
 import './AddRecipeForm.css';
+import React from 'react';
+import AddEditRecipeForm from './AddEditRecipeForm';
+import AddOrEdit from '../../models/AddOrEdit';
 
-function AddRecipeForm() {
-  return <h2>Add Recipe</h2>;
+function AddRecipeForm({ resetRecipeForm }) {
+  return (
+    <AddEditRecipeForm
+      resetRecipeForm={resetRecipeForm}
+      addOrEdit={AddOrEdit.Add}
+    />
+  );
 }
 
 export default AddRecipeForm;

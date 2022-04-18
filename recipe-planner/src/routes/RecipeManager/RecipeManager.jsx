@@ -1,18 +1,17 @@
 import './RecipeManager.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AddRecipeForm from './AddRecipeForm';
 import EditRecipeForm from './EditRecipeForm';
 import { SampleData } from '../../temp/sample-data';
-
-const formOptions = {
-  add: 'add',
-  edit: 'edit',
-};
+import AddOrEdit from '../../models/AddOrEdit';
+import emptyRecipe from '../../models/emptyRecipe';
 
 function RecipeManager() {
-  const [formChoice, setFormChoice] = useState(formOptions.add);
-  const [selectedRecipeId, setSelectedRecipeId] = useState(-1);
+  const [addOrEdit, setAddOrEdit] = useState(AddOrEdit.Add);
+  const [selectedRecipe, setSelectedRecipe] = useState(emptyRecipe);
   const [recipes, setRecipes] = useState(SampleData);
+
+  const resetRecipeForm = React.useRef(null);
 
   function getRecipeFromId(id) {
     const recipe = recipes.find((x) => x.id == id);
@@ -21,14 +20,20 @@ function RecipeManager() {
   }
 
   function handleAddRecipeClicked() {
-    setFormChoice(formOptions.add);
+    resetRecipeForm.current();
+
+    setAddOrEdit(AddOrEdit.Add);
+
+    const recipeSelect = document.querySelector('#select-recipe');
+    recipeSelect.value = '';
   }
 
   function handleRecipeSelected(e) {
     const selectedId = e.target.value;
-    setSelectedRecipeId(selectedId);
+    const newSelectedRecipe = getRecipeFromId(selectedId);
 
-    setFormChoice(formOptions.edit);
+    setSelectedRecipe(newSelectedRecipe);
+    setAddOrEdit(AddOrEdit.Edit);
   }
 
   return (
@@ -48,13 +53,15 @@ function RecipeManager() {
           </option>
         ))}
       </select>
-      <div className="recipe-form">
-        {formChoice === formOptions.add ? (
-          <AddRecipeForm />
-        ) : (
-          <EditRecipeForm originalRecipe={getRecipeFromId(selectedRecipeId)} />
-        )}
-      </div>
+      {addOrEdit === AddOrEdit.Add ? (
+        <AddRecipeForm resetRecipeForm={resetRecipeForm} />
+      ) : (
+        <EditRecipeForm
+          key={`edit-recipe-form-${selectedRecipe.id}`}
+          resetRecipeForm={resetRecipeForm}
+          originalRecipe={selectedRecipe}
+        />
+      )}
     </>
   );
 }

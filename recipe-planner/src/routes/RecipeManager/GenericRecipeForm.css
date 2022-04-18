@@ -1,0 +1,134 @@
+.recipe-form {
+  width: 100%;
+  border-top: 1px solid black;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.recipe-form .legend-wrapper {
+  max-width: 450px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.recipe-form .reset-form-button {
+  position: absolute;
+  top: calc(50% - 0.5rem);
+  right: -79px;
+}
+
+.recipe-form .legend-wrapper legend {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.recipe-form > fieldset {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 10px;
+}
+
+.recipe-form .attribute {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 5px 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.recipe-form input {
+  width: 50%;
+  margin: 0;
+  margin-top: 2px;
+}
+
+.recipe-form .image-source-container {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+}
+
+.recipe-form .display-image-source {
+  position: absolute;
+  top: 2px;
+  width: 33%;
+  display: inline-block;
+  padding: 1.5px 4px;
+  border: 1px solid rgb(118, 118, 118);
+  border-left: none;
+  background-color: #fff;
+  min-height: calc(1rem + 2px);
+}
+
+.recipe-form input[type='file' i] {
+  border: 1px solid rgb(118, 118, 118);
+  border-right: 2px solid rgb(118, 118, 118);
+  width: 16%;
+}
+
+.recipe-form input[type='radio'] {
+  height: 0.75rem;
+  width: 1rem;
+  display: inline-block;
+  margin: 2px;
+}
+
+.recipe-form .recipe-source {
+  display: inline-block;
+}
+
+.recipe-form .rating-container {
+  margin-top: 4px;
+}
+
+.recipe-form .recipe-source label {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.recipe-form .radio-container {
+  margin-bottom: 20px;
+}
+
+.recipe-form .radio-group-label {
+  margin: 0 0 5px 0;
+}
+
+.recipe-form .ingredient-container {
+  display: grid;
+  grid-template-columns: 5fr 1fr 5fr 1fr;
+  column-gap: 10px;
+  margin-bottom: 10px;
+}
+
+.recipe-form .ingredient-container label,
+.recipe-form .ingredient-container label + * {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.recipe-form .ingredient-container select {
+  margin-top: 2px;
+}
+
+.recipe-form .ingredient-delete {
+  place-self: center;
+  cursor: pointer;
+}
+
+.recipe-form .ingredient-delete i {
+  font-size: 1.5rem;
+}
+
+.recipe-form i.ingredient-add {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
