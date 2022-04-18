@@ -38,12 +38,39 @@ function RecipeWeek() {
   }
 
   function swapCards(startIndex, dropIndex) {
+    const startNode = document.querySelectorAll('.card-wrapper')[startIndex];
+    const dropNode = document.querySelectorAll('.card-wrapper')[dropIndex];
+
+    const flippedOpposite =
+      startNode.classList.contains('selected') !=
+      dropNode.classList.contains('selected');
+
+    const cardList = [
+      ...startNode.querySelectorAll('.card-front, .card-back'),
+      ...dropNode.querySelectorAll('.card-front, .card-back'),
+    ];
+
+    if (flippedOpposite) {
+      startNode.classList.toggle('selected');
+      dropNode.classList.toggle('selected');
+
+      cardList.forEach((node) => {
+        node.classList.add('skip-animation');
+      });
+    }
+
     const newArray = [...cardData];
     const placeHolder = newArray[startIndex];
     newArray[startIndex] = newArray[dropIndex];
     newArray[dropIndex] = placeHolder;
 
     setCardData(newArray);
+
+    cardList.forEach((node) => {
+      setTimeout(() => {
+        node.classList.remove('skip-animation');
+      }, 1);
+    });
   }
 
   return (
