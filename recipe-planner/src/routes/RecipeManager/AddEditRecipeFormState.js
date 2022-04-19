@@ -2,7 +2,7 @@ import { useState } from 'react';
 import emptyRecipe from '../../models/emptyRecipe';
 
 export default function useAddEditRecipeFormState(recipe = emptyRecipe) {
-  const [recipeId, setRecipeId] = useState(recipe.id);
+  const [recipeId] = useState(recipe.id);
   const [title, setTitle] = useState(recipe.title);
   const [imageSource, setImageSource] = useState(recipe.imageSource);
   const [prepTime, setPrepTime] = useState(recipe.prepTime);

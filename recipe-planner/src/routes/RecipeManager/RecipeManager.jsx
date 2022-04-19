@@ -13,7 +13,7 @@ function RecipeManager() {
   const resetRecipeForm = React.useRef(null);
 
   function getRecipeFromId(id) {
-    const recipe = recipes.find((x) => x.id == id);
+    const recipe = recipes.find((x) => x.id === parseInt(id));
 
     return recipe;
   }

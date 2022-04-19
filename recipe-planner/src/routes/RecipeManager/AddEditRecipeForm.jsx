@@ -41,7 +41,7 @@ function AddEditRecipeForm({
 
   useEffect(() => {
     resetRecipeForm.current = resetAllState;
-  }, []);
+  }, [resetAllState, resetRecipeForm]);
 
   let ingredientCounter = 0;
 
@@ -78,7 +78,7 @@ function AddEditRecipeForm({
 
   function handleIngredientChange(propertyName, id, event) {
     const newIngredients = ingredients.map((ingredient) => {
-      return id == ingredient.id
+      return parseInt(id) === ingredient.id
         ? { ...ingredient, [propertyName]: event.target.value }
         : ingredient;
     });

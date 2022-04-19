@@ -27,19 +27,18 @@ function SummaryIngredientsList({ cardData }) {
 
   function aggregateIngredients() {
     const ingredientsByDay = {};
-    const allIngredients = cardData
-      .filter((card) => card?.ingredients)
-      .flatMap((card, index) => {
-        card.ingredients.forEach((ingredient) => {
-          if (ingredientsByDay[ingredient.name]) {
-            ingredientsByDay[ingredient.name].push(index);
-          } else {
-            ingredientsByDay[ingredient.name] = [index];
-          }
-        });
-
-        return card.ingredients;
+    const allIngredients = cardData.flatMap((card, index) => {
+      console.log(JSON.stringify(card), index);
+      card?.ingredients.forEach((ingredient) => {
+        if (ingredientsByDay[ingredient.name]) {
+          ingredientsByDay[ingredient.name].push(index);
+        } else {
+          ingredientsByDay[ingredient.name] = [index];
+        }
       });
+
+      return card?.ingredients || [];
+    });
 
     const ingredientDictionary = {};
 
@@ -120,12 +119,12 @@ function SummaryIngredientsList({ cardData }) {
                 <td>{ingredient.name}</td>
                 <td>{`${ingredient.amount} ${ingredient.unit}(s)`}</td>
                 <td>
-                  {ingredient.days?.map((day, index) => [
+                  {ingredient.days?.map((day, index) => (
                     <div className="ingredient-breakdown-day" key={day}>
                       [{getNamedDayFromIndex(day)}]
                       {insertIngredientDetailsForDay(ingredient.name, day)}
-                    </div>,
-                  ])}
+                    </div>
+                  ))}
                 </td>
               </tr>
             );

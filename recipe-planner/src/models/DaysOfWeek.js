@@ -1,11 +1,11 @@
 export const DaysOfWeekIndex = {
-  Su: 0,
-  M: 1,
-  T: 2,
-  W: 3,
-  Th: 4,
-  F: 5,
-  S: 6,
+  M: 0,
+  T: 1,
+  W: 2,
+  Th: 3,
+  F: 4,
+  S: 5,
+  Su: 6,
 };
 
 export const DaysOfWeek = ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
