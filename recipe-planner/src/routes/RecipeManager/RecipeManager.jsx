@@ -37,6 +37,14 @@ function RecipeManager() {
     setAddOrEdit(AddOrEdit.Edit);
   }
 
+  function handleSaveRecipe(recipe) {
+    console.log('saving', recipe);
+  }
+
+  function handleDeleteRecipe(id) {
+    console.log('deleting Id: ', id);
+  }
+
   return (
     <>
       <h1>Add, Edit, or Delete Recipes</h1>
@@ -62,6 +70,8 @@ function RecipeManager() {
         recipe={selectedRecipe}
         resetRecipeForm={resetRecipeForm}
         addOrEdit={addOrEdit}
+        saveRecipe={handleSaveRecipe}
+        deleteRecipe={handleDeleteRecipe}
       />
     </>
   );

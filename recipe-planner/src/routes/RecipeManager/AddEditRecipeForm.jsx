@@ -9,8 +9,12 @@ function AddEditRecipeForm({
   recipe = emptyRecipe,
   resetRecipeForm,
   addOrEdit,
+  deleteRecipe,
+  saveRecipe,
 }) {
   const {
+    recipeId,
+
     title,
     setTitle,
     imageSource,
@@ -32,6 +36,7 @@ function AddEditRecipeForm({
     ingredients,
     setIngredients,
     resetAllState,
+    getFinishedRecipe,
   } = useAddEditRecipeFormState(recipe);
 
   useEffect(() => {
@@ -39,6 +44,15 @@ function AddEditRecipeForm({
   }, []);
 
   let ingredientCounter = 0;
+
+  function handleRecipeDeleteClick() {
+    deleteRecipe(recipeId);
+  }
+
+  function handleRecipeSaveClick() {
+    const finishedRecipe = getFinishedRecipe();
+    saveRecipe(finishedRecipe);
+  }
 
   function handleAddIngredientClick() {
     let maxId = 99999; // this will have to change.  We are only grabbing the maxId of the ingredients in this recipe, not all recipes.  this will solve itself when this is performed at the DB level
@@ -309,11 +323,19 @@ function AddEditRecipeForm({
         ></i>
       </fieldset>
       <div className="bottom-buttons">
-        <button type="button" className="delete-button">
+        <button
+          type="button"
+          className="delete-button"
+          onClick={handleRecipeDeleteClick}
+        >
           Delete
         </button>
 
-        <button type="button" className="save-button">
+        <button
+          type="button"
+          className="save-button"
+          onClick={handleRecipeSaveClick}
+        >
           Save
         </button>
       </div>

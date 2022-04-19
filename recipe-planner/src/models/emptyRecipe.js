@@ -1,5 +1,5 @@
 const emptyRecipe = {
-  id: 9999999,
+  id: -1,
   title: '',
   imageSource: '',
   prepTime: '',
