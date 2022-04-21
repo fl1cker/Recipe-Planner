@@ -10,11 +10,13 @@ import { getAllRecipes } from '../../services/recipe-service';
 function RecipeWeek() {
   const [allRecipes, setAllRecipes] = useState([]);
   const [cardData, setCardData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllRecipes();
       setAllRecipes(data);
+      setIsLoading(false);
     };
 
     fetchData().catch(console.error);
@@ -144,6 +146,7 @@ function RecipeWeek() {
                   />
                 ) : (
                   <EmptyCardContents
+                    isLoading={isLoading}
                     refreshDay={() => handleRefreshDayClick(index)}
                   />
                 )}

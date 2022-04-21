@@ -1,5 +1,9 @@
 import './RecipeManager.css';
-import { getAllRecipes } from '../../services/recipe-service';
+import {
+  getAllRecipes,
+  createRecipe,
+  updateRecipe,
+} from '../../services/recipe-service';
 import React, { useState, useEffect } from 'react';
 import AddOrEdit from '../../models/AddOrEdit';
 import emptyRecipe from '../../models/emptyRecipe';
@@ -48,7 +52,7 @@ function RecipeManager() {
   }
 
   function handleSaveRecipe(recipe) {
-    console.log('saving', recipe);
+    addOrEdit === AddOrEdit.Add ? createRecipe(recipe) : updateRecipe(recipe);
   }
 
   function handleDeleteRecipe(id) {

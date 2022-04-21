@@ -1,14 +1,17 @@
 import axios from 'axios';
 import keys from '../keys';
 
+const functionAppUrl = 'https://recipe-planner-app.azurewebsites.net/api/';
+const config = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+};
+
 export const getAllRecipes = async () => {
   const response = await axios.get(
-    `https://recipe-planner-app.azurewebsites.net/api/GetAllRecipes?code=${keys.getAllRecipesKey}`,
-    {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-    }
+    `${functionAppUrl}GetAllRecipes${keys.getAllRecipesKey}`,
+    config
   );
 
   const recipes = response.data.map((recipe) => {
@@ -25,4 +28,30 @@ export const getAllRecipes = async () => {
     };
   });
   return recipes;
+};
+
+export const createRecipe = async (recipe) => {
+  const body = {
+    recipe,
+  };
+  await axios.post(
+    `${functionAppUrl}CreateRecipe${keys.createRecipeKey}`,
+    body,
+    config
+  );
+};
+
+export const updateRecipe = async (recipe) => {
+  const body = {
+    recipe,
+  };
+
+  //await axios.put(`${functionAppUrl}${keys.updateRecipeKey}`, body, config);
+};
+
+export const deleteRecipe = async (id) => {
+  await axios.delete(
+    `${functionAppUrl}DeleteRecipe${keys.deleteRecipeKey}&id=${id}`,
+    config
+  );
 };
