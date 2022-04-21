@@ -1,13 +1,18 @@
 import './SummaryIngredientsList.css';
 import { getNamedDayFromIndex } from '../../models/DaysOfWeek';
 import { sortByName } from '../../helper-functions';
+import {
+  allUnitsOfMeasurement,
+  validMeasurementsForConversion,
+  invalidMeasurementsForConversion,
+} from '../../models/unitsOfMeasurement';
 
 const convert = require('convert-units');
 const keySplit = '|';
 
 function SummaryIngredientsList({ cardData }) {
   function getIngredientConversion(element) {
-    const ingredient = element;
+    const ingredient = { ...element };
     try {
       ingredient.amount = convert(element.amount).from(element.unit).to('oz');
       ingredient.unit = 'oz';
@@ -18,7 +23,9 @@ function SummaryIngredientsList({ cardData }) {
           .to('fl-oz');
         ingredient.unit = 'fl-oz';
       } catch {
-        console.error(element, 'cannot be converted to oz or fl-oz');
+        if (validMeasurementsForConversion.includes(element.unit)) {
+          console.error(element, 'cannot be converted to oz or fl-oz');
+        }
       }
     }
 
@@ -28,7 +35,6 @@ function SummaryIngredientsList({ cardData }) {
   function aggregateIngredients() {
     const ingredientsByDay = {};
     const allIngredients = cardData.flatMap((card, index) => {
-      console.log(JSON.stringify(card), index);
       card?.ingredients.forEach((ingredient) => {
         if (ingredientsByDay[ingredient.name]) {
           ingredientsByDay[ingredient.name].push(index);
@@ -69,7 +75,7 @@ function SummaryIngredientsList({ cardData }) {
 
       let newUnit = currentUnit;
 
-      if (newUnit !== 'unit') {
+      if (validMeasurementsForConversion.includes(newUnit)) {
         const { val, unit } = convert(ingredientDictionary[key])
           .from(currentUnit)
           .toBest();

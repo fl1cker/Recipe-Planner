@@ -1,14 +1,54 @@
 import './RecipeWeek.css';
 import Card from './Card';
-import { SampleData } from '../../temp/sample-data';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EmptyCardContents from './EmptyCardContents';
 import SummaryPanel from './SummaryPanel';
 import DragAndDrop from '../../DragAndDrop';
 import { DaysOfWeek } from '../../models/DaysOfWeek';
+import { getAllRecipes } from '../../services/recipe-service';
 
 function RecipeWeek() {
-  const [cardData, setCardData] = useState(populateWeek(7));
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllRecipes();
+      setAllRecipes(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    setCardData(populateWeek());
+  }, [allRecipes]);
+
+  function populateWeek() {
+    const meals = [];
+    for (let i = 0; i < 7; i++) {
+      meals.push(getRandomMeal());
+    }
+
+    return meals;
+  }
+
+  function getRandomMeal() {
+    return allRecipes[Math.floor(Math.random() * allRecipes.length)];
+  }
+
+  function getDateRangeFromThisWeek() {
+    const today = new Date();
+    const first = today.getDate() - today.getDay() + 1;
+
+    const monday = new Date(today.setDate(first));
+
+    const last = monday.getDate() + 6;
+    const sunday = new Date(today.setDate(last));
+
+    return `${monday.getMonth() + 1} / ${monday.getDate()} - 
+      ${sunday.getMonth() + 1} / ${sunday.getDate()}`;
+  }
 
   function handleRefreshDayClick(index) {
     cardData[index] = getRandomMeal();
@@ -87,18 +127,18 @@ function RecipeWeek() {
         </button>
       </div>
       <div className="cards">
-        {DaysOfWeek.map((day, index) => {
+        {cardData.map((card, index) => {
           return (
-            <div className="day-card" key={day}>
-              <div className="day">{day}</div>
+            <div className="day-card" key={DaysOfWeek[index]}>
+              <div className="day">{DaysOfWeek[index]}</div>
               <DragAndDrop
-                key={day}
+                key={card?.id}
                 index={index}
                 swapMethod={(x, y) => swapCards(x, y)}
               >
-                {cardData[index] ? (
+                {card ? (
                   <Card
-                    cardData={cardData[index]}
+                    cardData={card}
                     refreshDay={() => handleRefreshDayClick(index)}
                     clearDay={() => handleClearDayClick(index)}
                   />
@@ -121,32 +161,6 @@ function RecipeWeek() {
       </div>
     </div>
   );
-}
-
-function populateWeek(daysToPopulate) {
-  const meals = [];
-  for (let i = 0; i < daysToPopulate; i++) {
-    meals.push(getRandomMeal());
-  }
-
-  return meals;
-}
-
-function getRandomMeal() {
-  return Math.random() <= 0.5 ? SampleData[0] : SampleData[1];
-}
-
-function getDateRangeFromThisWeek() {
-  const today = new Date();
-  const first = today.getDate() - today.getDay() + 1;
-
-  const monday = new Date(today.setDate(first));
-
-  const last = monday.getDate() + 6;
-  const sunday = new Date(today.setDate(last));
-
-  return `${monday.getMonth() + 1} / ${monday.getDate()} - 
-    ${sunday.getMonth() + 1} / ${sunday.getDate()}`;
 }
 
 export default RecipeWeek;

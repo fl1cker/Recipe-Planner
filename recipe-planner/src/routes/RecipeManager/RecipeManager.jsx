@@ -1,6 +1,6 @@
 import './RecipeManager.css';
-import React, { useState } from 'react';
-import { SampleData } from '../../temp/sample-data';
+import { getAllRecipes } from '../../services/recipe-service';
+import React, { useState, useEffect } from 'react';
 import AddOrEdit from '../../models/AddOrEdit';
 import emptyRecipe from '../../models/emptyRecipe';
 import AddEditRecipeForm from './AddEditRecipeForm';
@@ -8,12 +8,20 @@ import AddEditRecipeForm from './AddEditRecipeForm';
 function RecipeManager() {
   const [addOrEdit, setAddOrEdit] = useState(AddOrEdit.Add);
   const [selectedRecipe, setSelectedRecipe] = useState(emptyRecipe);
-  const [recipes, setRecipes] = useState(SampleData);
-
+  const [recipes, setRecipes] = useState([]);
   const resetRecipeForm = React.useRef(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllRecipes();
+      setRecipes(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
   function getRecipeFromId(id) {
-    const recipe = recipes.find((x) => x.id === parseInt(id));
+    const recipe = recipes.find((x) => x.id === id);
 
     return recipe;
   }
@@ -29,8 +37,10 @@ function RecipeManager() {
   }
 
   function handleRecipeSelected(newId) {
-    console.log('changing with ', newId);
-
+    if (!newId) {
+      handleAddRecipeClicked();
+      return;
+    }
     const newSelectedRecipe = getRecipeFromId(newId);
 
     setSelectedRecipe(newSelectedRecipe);
@@ -42,7 +52,7 @@ function RecipeManager() {
   }
 
   function handleDeleteRecipe(id) {
-    console.log('deleting Id: ', id);
+    console.log('deleting Id', id);
   }
 
   return (

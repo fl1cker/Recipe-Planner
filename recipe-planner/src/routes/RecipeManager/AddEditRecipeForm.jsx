@@ -4,6 +4,7 @@ import RatingSystem from '../../RatingSystem';
 import useAddEditRecipeFormState from './AddEditRecipeFormState';
 import AddOrEdit from '../../models/AddOrEdit';
 import emptyRecipe from '../../models/emptyRecipe';
+import { allUnitsOfMeasurement } from '../../models/unitsOfMeasurement';
 
 function AddEditRecipeForm({
   recipe = emptyRecipe,
@@ -14,7 +15,6 @@ function AddEditRecipeForm({
 }) {
   const {
     recipeId,
-
     title,
     setTitle,
     imageSource,
@@ -43,10 +43,14 @@ function AddEditRecipeForm({
     resetRecipeForm.current = resetAllState;
   }, [resetAllState, resetRecipeForm]);
 
+  useEffect(() => {
+    resetAllState();
+  }, [recipe]);
+
   let ingredientCounter = 0;
 
   function handleRecipeDeleteClick() {
-    deleteRecipe(recipeId);
+    recipeId >= 0 ? deleteRecipe(recipeId) : resetAllState();
   }
 
   function handleRecipeSaveClick() {
@@ -68,7 +72,7 @@ function AddEditRecipeForm({
       id: ++maxId,
       name: '',
       amount: 0,
-      unit: 'unit',
+      unit: 'whole',
     };
 
     ingredients.push(newIngredient);
@@ -301,11 +305,19 @@ function AddEditRecipeForm({
                 </label>
                 <select
                   id={`ingredient-unit${ingredientCounter}`}
+                  value={ingredient.unit}
                   onChange={(e) =>
                     handleIngredientChange('unit', ingredient.id, e)
                   }
                 >
-                  <option value="">Default</option>
+                  <option value=""></option>
+                  {allUnitsOfMeasurement.sort().map((unit) => {
+                    return (
+                      <option key={unit} value={unit}>
+                        {unit}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
               <div className="ingredient-delete">

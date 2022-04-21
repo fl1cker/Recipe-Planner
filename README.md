@@ -32,5 +32,5 @@ Utilizing this website you can:
   - either azure sql or cosmos DB for storing recipes
 - Build services for interacting with the backend API
 - Look for opportunities to simplify state, perhaps with Context
-- Look for opportunities to clean up UI
+- Pretty up the Add/Edit/Delete Recipe screen
 - Look for opportunities to clean up CSS
