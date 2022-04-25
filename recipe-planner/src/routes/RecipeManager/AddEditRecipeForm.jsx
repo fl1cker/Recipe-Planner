@@ -14,7 +14,7 @@ function AddEditRecipeForm({
   saveRecipe,
 }) {
   const {
-    recipeId,
+    id,
     title,
     setTitle,
     imageSource,
@@ -50,7 +50,7 @@ function AddEditRecipeForm({
   let ingredientCounter = 0;
 
   function handleRecipeDeleteClick() {
-    recipeId >= 0 ? deleteRecipe(recipeId) : resetAllState();
+    id >= 0 ? deleteRecipe(id) : resetAllState();
   }
 
   function handleRecipeSaveClick() {

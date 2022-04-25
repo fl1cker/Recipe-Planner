@@ -3,6 +3,7 @@ import {
   getAllRecipes,
   createRecipe,
   updateRecipe,
+  deleteRecipe,
 } from '../../services/recipe-service';
 import React, { useState, useEffect } from 'react';
 import AddOrEdit from '../../models/AddOrEdit';
@@ -17,12 +18,18 @@ function RecipeManager() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllRecipes();
-      setRecipes(data);
+      await refreshRecipes();
     };
 
     fetchData().catch(console.error);
   }, []);
+
+  async function refreshRecipes() {
+    const data = await getAllRecipes();
+    setRecipes(data);
+    setSelectedRecipe(emptyRecipe);
+    setAddOrEdit(AddOrEdit.Add);
+  }
 
   function getRecipeFromId(id) {
     const recipe = recipes.find((x) => x.id === id);
@@ -51,12 +58,17 @@ function RecipeManager() {
     setAddOrEdit(AddOrEdit.Edit);
   }
 
-  function handleSaveRecipe(recipe) {
-    addOrEdit === AddOrEdit.Add ? createRecipe(recipe) : updateRecipe(recipe);
+  async function handleSaveRecipe(recipe) {
+    addOrEdit === AddOrEdit.Add
+      ? await createRecipe(recipe)
+      : await updateRecipe(recipe);
+
+    await refreshRecipes();
   }
 
-  function handleDeleteRecipe(id) {
-    console.log('deleting Id', id);
+  async function handleDeleteRecipe(id) {
+    await deleteRecipe(id);
+    await refreshRecipes();
   }
 
   return (

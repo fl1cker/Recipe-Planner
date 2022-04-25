@@ -2,7 +2,7 @@ import { useState } from 'react';
 import emptyRecipe from '../../models/emptyRecipe';
 
 export default function useAddEditRecipeFormState(recipe = emptyRecipe) {
-  const [recipeId, setRecipeId] = useState(recipe.id);
+  const [id, setId] = useState(recipe.id);
   const [title, setTitle] = useState(recipe.title);
   const [imageSource, setImageSource] = useState(recipe.imageSource);
   const [prepTime, setPrepTime] = useState(recipe.prepTime);
@@ -15,7 +15,7 @@ export default function useAddEditRecipeFormState(recipe = emptyRecipe) {
   const [ingredients, setIngredients] = useState(recipe.ingredients);
 
   function resetAllState() {
-    setRecipeId(recipe.id);
+    setId(recipe.id);
     setTitle(recipe.title);
     setImageSource(recipe.imageSource);
     setPrepTime(recipe.prepTime);
@@ -30,24 +30,24 @@ export default function useAddEditRecipeFormState(recipe = emptyRecipe) {
 
   function getFinishedRecipe() {
     return {
-      recipeId: recipeId,
-      title: title,
-      imageSource: imageSource,
-      prepTime: prepTime,
-      completionTime: completionTime,
-      levelOfEffort: levelOfEffort,
-      tasteRating: tasteRating,
+      id,
+      title,
+      imageSource,
+      prepTime,
+      completionTime,
+      levelOfEffort,
+      tasteRating,
       recipeSource: {
-        sourceType: sourceType,
-        location: location,
-        details: details,
+        sourceType,
+        location,
+        details,
       },
       ingredients: ingredients,
     };
   }
 
   return {
-    recipeId,
+    id,
     title,
     setTitle,
     imageSource,

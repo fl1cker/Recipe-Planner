@@ -31,9 +31,8 @@ export const getAllRecipes = async () => {
 };
 
 export const createRecipe = async (recipe) => {
-  const body = {
-    recipe,
-  };
+  const body = { ...recipe };
+
   await axios.post(
     `${functionAppUrl}CreateRecipe${keys.createRecipeKey}`,
     body,
@@ -42,11 +41,13 @@ export const createRecipe = async (recipe) => {
 };
 
 export const updateRecipe = async (recipe) => {
-  const body = {
-    recipe,
-  };
+  const body = { ...recipe };
 
-  //await axios.put(`${functionAppUrl}${keys.updateRecipeKey}`, body, config);
+  await axios.put(
+    `${functionAppUrl}EditRecipe${keys.editRecipeKey}&id=${recipe.id}`,
+    body,
+    config
+  );
 };
 
 export const deleteRecipe = async (id) => {
