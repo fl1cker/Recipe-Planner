@@ -26,6 +26,7 @@ function RecipeManager() {
 
   async function refreshRecipes() {
     const data = await getAllRecipes();
+    resetRecipeForm.current();
     setRecipes(data);
     setSelectedRecipe(emptyRecipe);
     setAddOrEdit(AddOrEdit.Add);

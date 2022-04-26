@@ -33,6 +33,11 @@ export const getAllRecipes = async () => {
 export const createRecipe = async (recipe) => {
   const body = { ...recipe };
 
+  const newHeaders = {
+    ...config.headers,
+    'Content-Type': 'multipart/form-data',
+  };
+
   await axios.post(
     `${functionAppUrl}CreateRecipe${keys.createRecipeKey}`,
     body,
