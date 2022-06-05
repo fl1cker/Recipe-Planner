@@ -1,6 +1,6 @@
 .header-bar {
   margin: 0;
-  width: 100%;
+  width: 100vw;
   height: 70px;
   background-color: teal;
   box-shadow: 0 -3px 25px 8px black;
@@ -10,14 +10,22 @@
   align-items: center;
 }
 
-.header-bar > * {
-  height: 100%;
-  width: 33%;
+.header-bar > .header-bar-nav {
+  width: 33vw;
 }
 
 .header-bar > .title {
   font-size: 3rem;
   color: #fff;
   text-shadow: 1px 1px lightgray;
-  text-align: center;
+  margin: 0;
+  padding-left: 9rem;
+  width: 66vw;
+}
+
+@media only screen and (max-width: 570px) {
+  .header-bar > .title {
+    font-size: 2rem;
+    padding-left: 6.5rem;
+  }
 }

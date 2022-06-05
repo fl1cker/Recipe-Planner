@@ -8,7 +8,6 @@ function HeaderBar() {
         <MainNavigation />
       </div>
       <div className="title">Honey Dew</div>
-      <div className="empty"></div>
     </div>
   );
 }

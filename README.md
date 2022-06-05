@@ -23,14 +23,14 @@ Utilizing this website you can:
 ## ToDo
 
 - Unit Tests
-- Add logic for saving CRUD operations for the recipes
+- Create Blob Storage account and container for images
+- Update CRUD AzureFunctions to handle blob storage images
 - Error Handling on Form
 - Setup google calendar integration
 - Add a calendar page to the website and allow the ability to quickly and easily switch between weeks when meal planning
-- Build backend architecture in Azure
-  - blob storage for images
-  - either azure sql or cosmos DB for storing recipes
-- Build services for interacting with the backend API
 - Look for opportunities to simplify state, perhaps with Context
 - Pretty up the Add/Edit/Delete Recipe screen
 - Look for opportunities to clean up CSS
+- Make the website responsive
+- Test with browsers other than Chrome
+- Add ToastPop on success/failures

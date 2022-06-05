@@ -117,16 +117,16 @@ function RecipeWeek() {
 
   return (
     <div className="recipe-week-wrapper">
+      <button
+        type="button"
+        className="finalize-button"
+        onClick={handleFinalizeClick}
+      >
+        Finalize
+      </button>
       <div className="date-range-header">
-        This Week's Recipes:&nbsp;
+        <span className="date-range-title">Week of:&nbsp;</span>
         <span className="date-range">{getDateRangeFromThisWeek()}</span>
-        <button
-          type="button"
-          className="finalize-button"
-          onClick={handleFinalizeClick}
-        >
-          Finalize
-        </button>
       </div>
       <div className="cards">
         {cardData.map((card, index) => {

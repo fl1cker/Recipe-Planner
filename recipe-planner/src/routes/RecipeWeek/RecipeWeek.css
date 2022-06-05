@@ -5,14 +5,12 @@
 }
 
 .cards {
-  margin: 10px 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   max-width: 100%;
-  margin-left: 60px;
-  margin-bottom: 0;
+  margin: 10px 0 10px 60px;
   row-gap: 20px;
 }
 
@@ -35,9 +33,6 @@
   margin-left: 15px;
   height: 3rem;
   font-size: 2rem;
-}
-
-.date-range-header {
   margin-top: 17px;
 }
 
@@ -76,4 +71,28 @@
 .card-holder {
   height: 100%;
   width: 100%;
+}
+
+@media only screen and (max-width: 602px) {
+  .cards {
+    margin-left: 22px;
+  }
+
+  .summary-panel {
+    width: 80%;
+    right: -80%;
+  }
+  .summary-panel.show {
+    transform: translateX(-80vw);
+  }
+}
+
+@media only screen and (min-width: 571px) and (max-width: 1064px) {
+  .summary-panel {
+    width: 60%;
+    right: -60%;
+  }
+  .summary-panel.show {
+    transform: translateX(-60vw);
+  }
 }
